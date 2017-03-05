@@ -1,0 +1,73 @@
+<template name="eventItem">
+	<div>
+		{{> eventMeta}}
+		{{>cyoa_add_form}}
+	</div>
+</template>
+
+<template name="eventMeta"> 
+	{{#with event}}
+<!-- 		<span class="h1"> {{> editableText collection="events" field="content"}}</span> -->
+<!-- 		<span class="h1"> {{content}}</span> -->
+	<br>
+      <div class="css-description-area editable-text-trigger">Event description: {{> editableText options=optionsHelper}}</div>
+		{{#if canEdit}}
+			<div class="row">
+				<div class="col-md-4 checkbox">
+			<label>
+				{{#if isPrv}}
+				<input type="checkbox" class="js-tog-private" checked>Private
+				{{else}}
+				<input type="checkbox" class="js-tog-private">Private
+				{{/if}}
+			</label>
+				</div>
+			</div>
+			{{> addCyoa}}
+		{{/if}}
+		<div id="event_description"></div>
+		<div id="cyoa_list">
+			{{> cyoaList}}
+		</div>
+	{{/with}}
+</template>
+<template name="addCyoa">
+{{#if currentUser}}
+	<button class="btn btn-lg css-adding-btn glyphicon glyphicon-plus js-show-cyoa-form" aria-hidden="true">
+	</button>
+	{{/if}}
+ <a href="#" class="js-add-cyoa">
+	</a>
+</template>
+<template name="cyoa_add_form">
+	<div class="modal fade" id="cyoa_add_form">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="modal-title">
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+							{{#basicFormBlock schema=schema action=action}}
+								<p> {{> basicInput field="title"}} </p>
+								<p> {{> basicInput field="url"}} </p>
+								<div class="form-group">
+									<button type="submit" id="submit_doc" class="btn btn-primary" disabled="{{disableButtons}}">Submit</button>
+<!-- 									<button type="submit" id="submit_cyoa" class="btn btn-primary" disabled="{{disableButtons}}">Create a CYOA</button> -->
+								</div>
+							{{/basicFormBlock}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+<template name="basicInput">
+  <strong>{{label}}</strong>
+  <br>
+  <input placeholder={{instructions}} class="reactive-element form-control" value={{value}}>
+  {{#if submitted}}
+    {{#if errorMessage}}<p class="error-message">{{errorMessage}}</p>{{/if}}
+  {{/if}}
+</template>

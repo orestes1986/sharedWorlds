@@ -1,0 +1,59 @@
+<template name="pageItem">
+    {{#with activePage}}
+		{{#if hasParent}}
+			<a href="/cyoas/{{cyoaid}}/page/{{parentid}}"  >parent</a>
+<!-- 			class="js-page-parent" -->
+		{{/if}}
+		<h2>{{> editableText collection="pages" field="title"}}</h2>
+<!-- 		<h2>{{title}}</h2> -->
+		{{> deletepage}}
+		<div class="row">
+			<div class="col-md-6">
+				{{> bodyEditor}}
+			</div>
+		</div>
+		{{>choiseList}}
+    {{/with}}
+</template>
+
+<template name="bodyEditor">
+      <div class="css-description-area editable-text-trigger">Pages content: {{> editableText options=optionsHelper}}</div>
+<!-- 		{{body}} -->
+</template>
+
+<template name="addPage">
+{{#if currentUser}}
+	<button class="btn btn-lg css-adding-btn glyphicon glyphicon-plus js-show-page-form" aria-hidden="true">
+	</button>
+	{{/if}}
+ <a href="#" class="js-add-page">
+	</a>
+</template>
+
+<template name="deletepage">
+	<a href="/cyoas/{{cyoaid}}" class="js-remove-page css-remove-page">
+		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		delete page
+	</a> 
+</template>
+
+<template name="page_add_form">
+	<div class="modal fade" id="page_add_form">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group">
+							{{#autoForm id="insertPageForm" collection="Pages"  meteormethod="addPage" type="method"}}
+								{{> afQuickField name="title"}}
+								{{> afQuickField name="cyoaid" value=cyoa_id}}
+								{{> afQuickField name="parentid" value=parent_id}}
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary js-btn" disabled="{{disableButtons}}">Submit</button>
+								</div>
+							{{/autoForm}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

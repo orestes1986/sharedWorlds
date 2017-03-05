@@ -1,0 +1,25 @@
+<template name="cyoaList">
+<!-- 	<div class="container top-margin"> -->
+<!-- 		<div class="row"> -->
+	{{#each cyoas}}
+<!-- 		<div class="col-md-3 col-xs-6"> -->
+<!-- 			<div class="light-border"> -->
+		<div>
+			{{#if url}}
+				<a href="{{url}}" class="css-cyoa-link">{{title}}</a>
+			{{else}}
+				<a href="/cyoas/{{_id}}" class="css-cyoa-link">{{title}}</a>
+			{{/if}}
+			{{>deleteCyoa}}
+	<!-- 			</div> -->
+	<!-- 		</div> -->
+		</div>
+	{{/each}}
+<!-- 		</div> -->
+<!-- 	</div> -->
+</template>
+<template name="deleteCyoa">
+	<a href="#" class="js-remove-cyoa">
+		<span class="glyphicon glyphicon-remove css-remove" aria-hidden="true"></span>
+	</a> 
+</template>

@@ -1,0 +1,15 @@
+
+<template name="choiseList">
+<!-- 		{{parentid}} -->
+    {{#each choicePages}}
+<!-- 		<span class="js-page-choises css-page-choises {{readyORnot}}">{{title}}</span> -->
+		<a href="/cyoas/{{cyoaid}}/page/{{_id}}" class="css-page-choises {{readyORnot}}">{{title}}</a>
+    {{/each}}
+</template>
+<template name="allPageList">
+<!-- 		{{parentid}} -->
+    {{#each allPages}}
+<!-- 		<span class="js-page-choises css-page-choises {{readyORnot}}">{{title}}</span> -->
+		<a href="/cyoas/{{cyoaid}}/page/{{_id}}" class="css-page-choises {{readyORnot}}">{{title}}</a>
+    {{/each}}
+</template>

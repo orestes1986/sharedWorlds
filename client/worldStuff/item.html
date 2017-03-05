@@ -1,0 +1,65 @@
+<template name="worldItem">
+	<div id="wholeBG" style="
+	background-color: {{get_color.[0]}};
+	background: -webkit-linear-gradient({{get_color}});
+	background: -o-linear-gradient({{get_color}});
+	background: -moz-linear-gradient({{get_color}});
+	background: linear-gradient({{get_color}});">
+	</div>
+	<div class="container top-margin">
+		{{> worldMeta}}
+<!-- 		{{> advList _id=_id sum_of_adv=advSum title=title desc=description tags=tags}} -->
+		{{> eventList _id=_id sum_of_adv=advSum title=title desc=description tags=tags}}
+	</div>
+</template>
+<template name="worldMeta"> 
+	{{#with world}}
+	<h1> {{>editableText collection="worlds" field="title"}}</h1>
+<!-- <div class="glyphicon glyphicon-edit css-edit-icon js-edit-icon"></div> -->
+<!-- 	<h1 class="js-edit-text">{{title}} </h1> -->
+	<div><p>
+		{{#each tags}}
+			<span style="border-style: solid;
+			border-radius: 10%;
+			background-color: #674ea7;
+			color: #fff2cc;
+			padding: 2px;">
+				{{this}}
+			</span>
+		{{/each}}</p>
+      <div class="css-description-area editable-text-trigger">World descryption: 
+<!--       <textarea class="css-description-area js-edit-text">{{descripion}}</textarea> -->
+			{{> editableText options=optionsHelper}}
+<!-- 		collection="worlds" field="title" wysiwyg="true" -->
+	</div>
+      {{> editableText collection="worlds" field="descripion" wysiwyg="true"}}
+		<h4> Sum of adventures: <b>{{advSum}}</b></h4>
+		{{checkAdvSum}}
+		
+	</div>
+<!--	{{#if canEdit}}
+	<div class="row">
+		<div class="col-md-4 checkbox">
+	<label>
+		{{#if isPrv}}
+		<input type="checkbox" class="js-tog-private" checked>Private
+		{{else}}
+		<input type="checkbox" class="js-tog-private">Private
+		{{/if}}
+	</label>
+		</div>
+		<div class="col-md-8">
+	{{> deleteWorld}}
+		</div>
+	</div>
+	{{/if}}-->
+	
+	{{> deleteWorld}}
+	{{/with}}
+</template>
+<template name="deleteWorld">
+	<a href="/" class="js-remove-world css-remove css-remove-world">
+		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		delete world
+	</a> 
+</template>

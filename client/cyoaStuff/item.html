@@ -1,0 +1,19 @@
+<template name="cyoaItem">
+	<div class="container top-margin">
+		<div class="row">
+			<div class="col-md-12">
+	{{#with activeWorld}}
+		<a href="/worlds/{{_id}}"><h2>{{title}}</h2></a>
+	{{/with}}
+				{{#with adventure}}
+					<h1 style="color:#999;">{{> editableText collection="cyoas" field="title"}}</h1>
+					<a href="/cyoas/{{_id}}/list">Show all pages</a>
+				{{/with}}
+<!-- 				<h1 style="color:white;">{{> editableText collection="cyoas" field="title"}}</h1> -->
+			</div>
+		{{>pageItem}}
+		{{>page_add_form}}
+		</div>
+		{{> addPage}}
+	</div>
+</template>
