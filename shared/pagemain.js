@@ -14,7 +14,7 @@ Meteor.methods({
 				var pageid = Pages.insert(addingPage);
 				console.log(pageid);
 				console.log(Pages.findOne({_id:pageid}));
-				Meteor.call("updateCyoa", cyoa._id);
+				Meteor.call("updateCyoa", cyoa);
 				if (Meteor.isClient) {
 					$("#page_add_form").modal('hide');
 				}
@@ -30,7 +30,7 @@ Meteor.methods({
 				var cyoa = Cyoas.findOne({_id: page.cyoaid});
 // 				var updatingPage = ({title:page.title, parentid:page.parentid, cyoaid:page.cyoaid, owner:this.userId});
 				Pages.update({_id: page._id}, {$set:{title:page.title, body:page.body, parentid:page.parentid, cyoaid:page.cyoaid}});
-				Meteor.call("updateCyoa", cyoa._id);
+				Meteor.call("updateCyoa", cyoa);
 			}
 		}
 	},

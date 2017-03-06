@@ -49,7 +49,32 @@
 								{{> afQuickField name="parentid" value=parent_id}}
 								<div class="form-group">
 									<button type="submit" class="btn btn-primary js-btn" disabled="{{disableButtons}}">Submit</button>
+									<button type="button" class="btn btn-primary js-btn-select-existing-page" disabled="{{disableButtons}}">Select an existing page</button>
 								</div>
+							{{/autoForm}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="list_of_pages_form">
+	<div class="modal fade" id="list_of_pages_form">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group">
+							{{#autoForm id="addExistingPageForm" collection="Pages"  meteormethod="updatePage" type="method"}}
+								{{> existingPageList}}
+<!-- 								js-page-choises -->
+								<!--{{> afQuickField name="title"}}
+								{{> afQuickField name="cyoaid" value=cyoa_id}}
+								{{> afQuickField name="parentid" value=parent_id}}
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary js-btn" disabled="{{disableButtons}}">Submit</button>
+									<button type="button" class="btn btn-primary js-btn-select-existing-page" disabled="{{disableButtons}}">Select an existing page</button>
+								</div>-->
 							{{/autoForm}}
 					</div>
 				</div>

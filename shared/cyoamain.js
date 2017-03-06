@@ -14,17 +14,19 @@ Meteor.methods({
 // 			console.log(addedCyoa);
 			if (addedCyoa) {
 				if (!cyoa.url) {
+					console.log("Adding first page");
 					var parentid = "none";
-					var addingFirstPage = ({title:"First Page", cyoaid:cyoaid, parentid:parentid});
+					var addingFirstPage = ({title:"First Page", cyoaid:cyoaid, parentid:[parentid]});
 					Meteor.call("addPage", addingFirstPage);
 				}
 			}
-			Meteor.call("updateCyoa", cyoaid);
-			return Cyoas.findOne({_id:cyoaid});
+			var addedCyoa = Cyoas.findOne({_id:cyoaid});
+			Meteor.call("updateCyoa", addedCyoa);
+			return addedCyoa;
 		}
 	},
-	updateCyoa:function(cyoaid){
-		var realCyoa = Cyoas.findOne({_id:cyoaid});
+	updateCyoa:function(cyoa){
+		var realCyoa = Cyoas.findOne({_id:cyoa._id});
 		if (realCyoa){
 			if (realCyoa.owner == this.userId) {
 			Cyoas.update({_id: realCyoa._id}, {$set:{title:realCyoa.title, url:realCyoa.url, lastEdit:new Date()}});
@@ -35,8 +37,8 @@ Meteor.methods({
 		}
 	},
 	// removing events
-	removeCyoa:function(cyoaid){
-		var realCyoa = Cyoas.findOne({_id:cyoaid});
+	removeCyoa:function(cyoa){
+		var realCyoa = Cyoas.findOne({_id:cyoa._id});
 		if (realCyoa){
 			var eventid = realCyoa.eventid;
 			if (realCyoa.owner == this.userId) {

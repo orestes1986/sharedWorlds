@@ -126,6 +126,31 @@ Template.allPageList.helpers({
 		}
 	}
 });
+Template.existingPageList.helpers({
+	existingPages:function(){
+		var pages = Pages.find({cyoaid:Session.get("cyoaid"), parentid:Session.get("pageid")}).fetch();
+// 		console.log(pages);
+		var unwantedSuggestions = [];
+		for (var i = 0; i < pages.length;i++) {
+			unwantedSuggestions.push(pages[i]._id);
+		}
+		unwantedSuggestions.push(Session.get("pageid"));
+// 		console.log(unwantedSuggestions);
+		return Pages.find({cyoaid:Session.get("cyoaid"), _id:{$nin: unwantedSuggestions}});
+	},
+	readyORnot:function(){
+// 		console.log("readyORnot");
+// 		console.log(this._id);
+		var page = Pages.findOne({_id:this._id});
+		if(page.body) {
+// 			console.log("css-page-choise-ready");
+			return "css-page-choise-ready";
+		} else {
+// 			console.log("css-page-choise-not-ready");
+			return "css-page-choise-not-ready";
+		}
+	}
+});
 // Template.pageList.helpers({
 // 	activePage:function(){
 // 		return Pages.find({cyoaid:Session.get("cyoaid"), parentid:Session.get("pageid")});

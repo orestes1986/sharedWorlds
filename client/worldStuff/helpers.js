@@ -24,11 +24,11 @@ Template.worldMeta.helpers({
 	// find current world
 	world:function(){
 // 		console.log("worldid");
-		console.log(Worlds.findOne({_id:Session.get("worldid")}));
+// 		console.log(Worlds.findOne({_id:Session.get("worldid")}));
 		return Worlds.findOne({_id:Session.get("worldid")});
 	},
 	optionsHelper : function() {
-		console.log("optionsHelper");
+// 		console.log("optionsHelper");
 		return {
 			collection: "worlds",
 			field: "description",

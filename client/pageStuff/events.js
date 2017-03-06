@@ -38,3 +38,24 @@ Template.deletepage.events({
 		}
 	}, 
 });
+Template.page_add_form.events({
+	// remove page button
+	"click .js-btn-select-existing-page":function(event){
+		$("#list_of_pages_form").modal('show');
+		$("#page_add_form").modal('hide');
+	}, 
+});
+Template.list_of_pages_form.events({
+	// remove page button
+	"click .js-page-choises":function(event){
+		console.log(this);
+		console.log(this._id);
+		console.log(this.parentid);
+		this.parentid.push(Session.get("pageid"));
+		console.log(this.parentid);
+		Meteor.call("updatePage", this);
+// 		$("#list_of_pages_form").modal('show');
+		$("#list_of_pages_form").modal('hide');
+		return false;
+	}, 
+});

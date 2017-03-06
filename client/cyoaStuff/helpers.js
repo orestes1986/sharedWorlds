@@ -24,8 +24,8 @@ Template.cyoaItem.helpers({
 	},
 	// find current world
 	activeWorld:function(){
-		console.log("worldid");
-		console.log(Session.get("worldid"));
+// 		console.log("worldid");
+// 		console.log(Session.get("worldid"));
 		return Worlds.findOne({_id:Session.get("worldid")});
 	},
 });
