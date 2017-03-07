@@ -22,3 +22,7 @@
     vertical-align: super;
     font-size: smaller;
 }
+.css-link {
+	text-decoration: none;
+	color:white;
+}

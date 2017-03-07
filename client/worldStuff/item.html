@@ -27,6 +27,9 @@
 				{{this}}
 			</span>
 		{{/each}}</p>
+	<p>
+		World's owner: <a href="/users/{{owner}}" class="css-link">{{ownerUserName}}</a>
+	</p>
       <div class="css-description-area editable-text-trigger">World descryption: 
 <!--       <textarea class="css-description-area js-edit-text">{{descripion}}</textarea> -->
 			{{> editableText options=optionsHelper}}

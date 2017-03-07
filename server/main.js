@@ -16,6 +16,15 @@ Meteor.startup(function () {
 // publish read access to collections
 
 //////////////////////////////////
+Meteor.publish("userData", function () {
+//   if (this.userId) {
+    return Meteor.users.find({},
+                             {fields: {'username': 1, "first-name": 1, "last-name": 1}});
+//   } else {
+//     this.ready();
+//   }
+});
+//////////////////////////////////
 //////////////////////////////////
 // all visible worlds 
 Meteor.publish("worlds", function(){
@@ -65,7 +74,16 @@ Meteor.publish("cyoas", function(){
 		{owner:this.userId}
 		] 
 	});
-})	
+})
+// parameters for adventures 
+Meteor.publish("cyoaParams", function(){
+	return CyoaParams.find({
+	 $or:[
+		{isPrivate:{$ne:true}}, 
+		{owner:this.userId}
+		] 
+	});
+})
 // users editing adventures
 // Meteor.publish("cyoaEditingUsers", function(){
 // 	return CyoaEditingUsers.find();

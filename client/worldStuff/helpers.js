@@ -27,6 +27,12 @@ Template.worldMeta.helpers({
 // 		console.log(Worlds.findOne({_id:Session.get("worldid")}));
 		return Worlds.findOne({_id:Session.get("worldid")});
 	},
+	ownerUserName : function() {
+		console.log("ownerUserName");
+		console.log(this.owner);
+		console.log(Meteor.users.findOne({_id:this.owner}));
+		return Meteor.users.findOne({_id:this.owner}).username;
+	},
 	optionsHelper : function() {
 // 		console.log("optionsHelper");
 		return {

@@ -2,19 +2,83 @@
 	<div class="container top-margin">
 		<div class="row">
 			<div class="col-md-12">
-	{{#with activeWorld}}
-		<a href="/worlds/{{_id}}"><h2>{{title}}</h2></a>
-	{{/with}}
-				{{#with adventure}}
-					<h1 style="color:#999;">{{> editableText collection="cyoas" field="title"}}</h1>
-					<a href="/cyoas/{{_id}}/list">Show all pages</a>
-				{{/with}}
-<!-- 				<h1 style="color:white;">{{> editableText collection="cyoas" field="title"}}</h1> -->
+				{{> cyoaMeta}}
 			</div>
 		{{>pageItem}}
+		{{> addParam}}
+		{{>cyoaParams}}
+		{{>param_add_form}}
 		{{>page_add_form}}
 		{{>list_of_pages_form}}
 		</div>
 		{{> addPage}}
 	</div>
 </template>
+<template name="cyoaMeta">
+	{{#with activeWorld}}
+		<a href="/worlds/{{_id}}"><h2>{{title}}</h2></a>
+		<p>
+			World's owner: <a href="/users/{{owner}}" class="css-link">{{ownerUserName}}</a>
+		</p>
+	{{/with}}
+	{{#with adventures}}
+		<h1 style="color:#999;">{{> editableText collection="cyoas" field="title"}}</h1>
+		<p>
+			Adventure's owner: <a href="/users/{{owner}}" class="css-link">{{ownerUserName}}</a>
+		</p>
+		<a href="/cyoas/{{_id}}/list">Show all pages</a>
+	{{/with}}
+<!-- 	<h1 style="color:white;">{{> editableText collection="cyoas" field="title"}}</h1> -->
+</template>
+<template name="cyoaParams">
+{{#each params}}
+	{{title}}
+{{/each}}
+</template>
+
+<template name="addParam">
+{{#if currentUser}}
+	<button class="btn btn-lg css-adding-btn glyphicon glyphicon-plus js-show-page-form" aria-hidden="true" id="add-param-btn">
+	</button>
+	{{/if}}
+	<a href="#" class="js-add-page">
+	</a>
+</template>
+
+<template name="param_add_form">
+	<div class="modal fade" id="param_add_form">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group">
+					{{#autoForm id="insertPageForm" collection="CyoaParams"  meteormethod="addParam" type="method"}}
+								{{> afQuickField name="title"}}
+								{{> afQuickField name="data"}}
+							<!--	{{> afQuickField name="data"}} label="Data-value"}} label="Data-title"}}
+								{{> afQuickField name="data-value"}}-->
+								{{> afQuickField name="cyoaid" value=cyoa_id}}
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary js-btn" disabled="{{disableButtons}}">Submit</button>
+								</div>
+							{{/autoForm}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+<!--
+<template name="param_add_form">
+	<div class="modal fade" id="param_add_form">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group">
+						{{>quickForm collection="CyoaParams" id="new-param" meteormethod="addParam" type="method"}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+-->

@@ -1,6 +1,8 @@
 // code that is only sent to the client
 
 ////////////////
+Meteor.subscribe("userData");
+////////////////
 // subscribe to read WORLD data
 ////////////////
 Meteor.subscribe("worlds");
@@ -18,6 +20,7 @@ Meteor.subscribe("eventComments");
 Meteor.subscribe("cyoas");
 Meteor.subscribe("cyoaEditingUsers");
 Meteor.subscribe("cyoaComments");
+Meteor.subscribe("cyoaParams");
 ////////////////
 Meteor.subscribe("pages");
 ////////////////

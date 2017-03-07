@@ -3,14 +3,14 @@
 ////////
 
 Template.cyoaList.helpers({
-	// find all visible docs
+	// find all visible cyoas
 	cyoas:function(){
 		return Cyoas.find({eventid:Session.get("eventid")});
 	},
 });
-Template.cyoaItem.helpers({
-	// find all visible docs
-	adventure:function(){
+Template.cyoaMeta.helpers({
+	// find all visible adventures
+	adventures:function(){
 // 			console.log("cyoaid");
 // 			console.log(Session.get("cyoaid"));
 		if (Session.get("cyoaid")) {
@@ -27,6 +27,20 @@ Template.cyoaItem.helpers({
 // 		console.log("worldid");
 // 		console.log(Session.get("worldid"));
 		return Worlds.findOne({_id:Session.get("worldid")});
+	},
+	ownerUserName : function() {
+		console.log("ownerUserName");
+		console.log(this.owner);
+		console.log(Meteor.users.findOne({_id:this.owner}));
+		return Meteor.users.findOne({_id:this.owner}).username;
+	},
+});
+Template.cyoaItem.helpers({
+});
+Template.cyoaParams.helpers({
+	// find all visible docs
+	params:function(){
+		return CyoaParams.find({eventid:Session.get("cyoaid")});
 	},
 });
 // Template.cyoaItem.helpers({

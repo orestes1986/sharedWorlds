@@ -40,6 +40,12 @@ Template.eventMeta.helpers({
 // 		}
 // 		return false;
 	},
+  ownerUserName : function() {
+	console.log("ownerUserName");
+	console.log(this.owner);
+	console.log(Meteor.users.findOne({_id:this.owner}));
+	return Meteor.users.findOne({_id:this.owner}).username;
+  },
 	isPrv:function(){
 		if (Session.get("eventid")) {
 			var doc = Events.findOne({_id:Session.get("Events")});

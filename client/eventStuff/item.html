@@ -10,7 +10,10 @@
 <!-- 		<span class="h1"> {{> editableText collection="events" field="content"}}</span> -->
 <!-- 		<span class="h1"> {{content}}</span> -->
 	<br>
-      <div class="css-description-area editable-text-trigger">Event description: {{> editableText options=optionsHelper}}</div>
+	<p>
+		Event's owner: <a href="/users/{{owner}}" class="css-link">{{ownerUserName}}</a>
+	</p>
+	<div class="css-description-area editable-text-trigger">Event's description: {{> editableText options=optionsHelper}}</div>
 		{{#if canEdit}}
 			<div class="row">
 				<div class="col-md-4 checkbox">
@@ -27,8 +30,9 @@
 		{{/if}}
 		<div id="event_description"></div>
 		<div id="cyoa_list">
-			{{> cyoaList}}
-		</div>
+		Event's adventures:
+		{{> cyoaList}}
+	</div>
 	{{/with}}
 </template>
 <template name="addCyoa">

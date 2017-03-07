@@ -15,3 +15,10 @@ Template.deleteCyoa.events({
 		}
 	},
 });
+
+Template.addParam.events({
+	'click .js-show-page-form':function(event){
+// 		console.log("showing the modal...");
+		$("#param_add_form").modal('show');
+	},
+});
