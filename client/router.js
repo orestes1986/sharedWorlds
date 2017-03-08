@@ -31,13 +31,29 @@ Router.route('/', function () {
 	this.render("worldList", {to:"main"});	
 });
 // 'HOME' page
-Router.route('/users/:_id', function () {
+Router.route('/account/:_id', function () {
 // 	console.log("you hit / ");
 	Session.set("worldid", "none");
 	Session.set("eventid", "none");
 	Session.set("cyoaid", "none");
 	Session.set("pageid", "none");
-	Session.set("userHomeid", this.params._id);
+	if	(this.params._id) {
+		Session.set("userHomeid", this.params._id);
+	} else {
+		Session.set("userHomeid", Meteor.user()._id);
+	}
+	this.render("navbar-plain", {to:"header"});
+	this.render("userItem", {to:"main"});	
+});
+// 'HOME' page
+Router.route('/account', function () {
+// 	console.log("you hit / ");
+	Session.set("worldid", "none");
+	Session.set("eventid", "none");
+	Session.set("cyoaid", "none");
+	Session.set("pageid", "none");
+	console.log(Meteor.user());
+	Session.set("userHomeid", Meteor.user()._id);
 	this.render("navbar-plain", {to:"header"});
 	this.render("userItem", {to:"main"});	
 });
@@ -84,12 +100,29 @@ Router.route('/cyoas/:_id', function () {
 	if (page) {
 		Session.set("pageid", page._id);
 	}
+	var cyoa = Cyoas.findOne({_id:Session.get("cyoaid")});
+	if (cyoa) {
+		var event = Events.findOne({_id:cyoa.eventid});
+		if (event) {
+			Session.set("worldid", event.worldid);
+		}
+	}
+// 	console.log(Session.get("cyoaid"));
+// 	console.log(Session.get("worldid"));
 	this.render("navbar-plain", {to:"header"});
 	this.render("cyoaItem", {to:"main"});	
 });
 // individual page page
 Router.route('/cyoas/:cyoaid/page/:pageid', function () {
 // 	console.log("you hit /adventures	"+this.params._id);
+	Session.set("cyoaid", this.params.cyoaid);
+	var cyoa = Cyoas.findOne({_id:Session.get("cyoaid")});
+	if (cyoa) {
+		var event = Events.findOne({_id:cyoa.eventid});
+		if (event) {
+			Session.set("worldid", event.worldid);
+		}
+	}
 	Session.set("pageid", this.params.pageid);
 	this.render("navbar-plain", {to:"header"});
 	this.render("cyoaItem", {to:"main"});	

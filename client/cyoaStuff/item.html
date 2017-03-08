@@ -1,4 +1,6 @@
 <template name="cyoaItem">
+	<div class="css-black-bg">
+	</div>
 	<div class="container top-margin">
 		<div class="row">
 			<div class="col-md-12">
@@ -16,15 +18,15 @@
 </template>
 <template name="cyoaMeta">
 	{{#with activeWorld}}
-		<a href="/worlds/{{_id}}"><h2>{{title}}</h2></a>
+		<h2><a href="/worlds/{{_id}}" class="css-cyoa-world-link">{{title}}</a></h2>
 		<p>
-			World's owner: <a href="/users/{{owner}}" class="css-link">{{ownerUserName}}</a>
+			World's owner: <a href="/account/{{owner}}" class="css-link">{{ownerUserName}}</a>
 		</p>
 	{{/with}}
 	{{#with adventures}}
 		<h1 style="color:#999;">{{> editableText collection="cyoas" field="title"}}</h1>
 		<p>
-			Adventure's owner: <a href="/users/{{owner}}" class="css-link">{{ownerUserName}}</a>
+			Adventure's owner: <a href="/account/{{owner}}" class="css-link">{{ownerUserName}}</a>
 		</p>
 		<a href="/cyoas/{{_id}}/list">Show all pages</a>
 	{{/with}}

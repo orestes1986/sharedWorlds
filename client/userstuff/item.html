@@ -1,10 +1,49 @@
 <template name="userItem">
-<!-- 	User ID 	Session.get("userHomeid"); -->
-<!-- {{#with user}} -->
-{{> userInfo}}
-{{> userLikes}}
-{{> userBooks}}
-{{> userWorlds}}
-{{> userCyoas}}
-<!-- {{/with}} -->
+	{{#with user}}
+	<div class="container css-user-page">
+		<div class="row css-user-stuff">
+		{{> userInfo}}
+		{{> userWorlds}}
+		{{> userCyoas}}
+		{{> userBooks}}
+		{{> userLikes}}
+		</div>
+	</div>
+	{{/with}}
+</template>
+<template name="userInfo">
+<!-- 	{{#if user}} -->
+		<span class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+			<div class="css-user-property">
+				<h2>{{username}}</h2>
+				<h2>{{first_name}} {{last_name}}</h2>
+			</div>
+		</span>
+<!-- 	{{/if} -->
+</template>
+<template name="userWorlds">
+	{{#if hasWorlds}}
+		<span class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+			<div class="css-user-property">
+				{{#each world}}
+					<a href="/worlds/{{_id}}" id="{{_id}}"><p>{{title}},</p></a>
+				{{/each}}
+			</div>
+		</span>
+	{{/if}}
+</template>
+<template name="userCyoas">
+	{{#if hasCyoas}}
+		<span class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+			<div class="css-user-property">
+				{{#each cyoa}}
+					<a href="/cyoas/{{_id}}" id="{{_id}}"><p>{{title}},</p></a>
+				{{/each}}
+			</div>
+		</span>
+	{{/if}}
+</template>
+<template name="userBooks">
+</template>
+<template name="userLikes">
 </template>

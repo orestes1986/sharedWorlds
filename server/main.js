@@ -19,7 +19,7 @@ Meteor.startup(function () {
 Meteor.publish("userData", function () {
 //   if (this.userId) {
     return Meteor.users.find({},
-                             {fields: {'username': 1, "first-name": 1, "last-name": 1}});
+                             {fields: {'username': 1, "profile": 1}});
 //   } else {
 //     this.ready();
 //   }

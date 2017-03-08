@@ -23,7 +23,6 @@ aldeed:autoform
 aldeed:collection2
 check@1.2.4
 ejson@1.0.13
-ian:accounts-ui-bootstrap-3
 iron:router
 logging@1.1.17
 random@1.0.10
@@ -37,3 +36,4 @@ jorisbontje:vis
 templates:forms
 babrahams:editable-text-wysiwyg-bootstrap-3
 froala:editor
+ian:accounts-ui-bootstrap-3

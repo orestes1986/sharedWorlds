@@ -28,9 +28,9 @@ Template.worldMeta.helpers({
 		return Worlds.findOne({_id:Session.get("worldid")});
 	},
 	ownerUserName : function() {
-		console.log("ownerUserName");
-		console.log(this.owner);
-		console.log(Meteor.users.findOne({_id:this.owner}));
+// 		console.log("ownerUserName");
+// 		console.log(this.owner);
+// 		console.log(Meteor.users.findOne({_id:this.owner}));
 		return Meteor.users.findOne({_id:this.owner}).username;
 	},
 	optionsHelper : function() {

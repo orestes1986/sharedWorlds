@@ -7,7 +7,6 @@ Template.navbar.events({
 	"click .js-add-doc":function(event){
 		event.preventDefault();
 		console.log("Add a new doc!");
-
 		for (var i=0;i<10;i++){
 			Meteor.call('testMethod', function(){
 				console.log('testMethod returned');
