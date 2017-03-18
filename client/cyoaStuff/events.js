@@ -102,7 +102,7 @@ Template.param_edit_form.events({
 	},
 	'click .js-add-value': function(event) {
 		var param = CyoaParams.findOne({_id:Session.get("paramid")});
-		Meteor.call("addParamField", param, $(event.currentTarget).attr("data-data-index"));
+		Meteor.call("addParamFieldValue", param, $(event.currentTarget).attr("data-data-index"));
 // 		console.log("js-editable-value key down");
 		$(event.currentTarget).attr("data-clicked", "false");
 	},

@@ -145,17 +145,28 @@ Meteor.methods({
 						return false;
 					}
 				} else {
-						console.log("it is Empty");
-						var unsetObj = {};
-						unsetObj['data.' + dataIndex + '.values.'+valueIndex ] = '1';
-						console.log(unsetObj);
-						CyoaParams.update({_id:realParam._id}, {$unset:unsetObj}, {multi:true});
-						
-						var pullObj = {};
-						pullObj['data.' + dataIndex + '.values' ] = null;
-						console.log(pullObj);
-						CyoaParams.update({_id:realParam._id}, {$pull:pullObj}, {multi:true});
+						Meteor.call("removeParamFieldValue", param, dataIndex, valueIndex, updating);
 				}
+			}
+		}
+	},
+	removeParamFieldValue: function(param, dataIndex, valueIndex, updating){
+		console.log("Entered  removeParamFieldValue");
+// 		updating = updating.replace(/(\r\n|\n|\r)/gm," ");
+// 		console.log(updating);
+		var realParam = CyoaParams.findOne({_id:param._id});
+		if (realParam){
+			if (realParam.owner == this.userId) {
+				console.log("it is Empty");
+				var unsetObj = {};
+				unsetObj['data.' + dataIndex + '.values.'+valueIndex ] = '1';
+				console.log(unsetObj);
+				CyoaParams.update({_id:realParam._id}, {$unset:unsetObj}, {multi:true});
+				
+				var pullObj = {};
+				pullObj['data.' + dataIndex + '.values' ] = null;
+				console.log(pullObj);
+				CyoaParams.update({_id:realParam._id}, {$pull:pullObj}, {multi:true});
 			}
 		}
 	},
