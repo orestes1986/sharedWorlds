@@ -7,9 +7,11 @@
 				{{> cyoaMeta}}
 			</div>
 		{{>pageItem}}
+		{{>paramlist}}
 		{{> addParam}}
 		{{>cyoaParams}}
 		{{>param_add_form}}
+		{{>param_edit_form}}
 		{{>page_add_form}}
 		{{>list_of_pages_form}}
 		</div>
@@ -53,9 +55,9 @@
 			<div class="modal-content">
 				<div class="modal-body">
 					<div class="form-group">
-					{{#autoForm id="insertPageForm" collection="CyoaParams"  meteormethod="addParam" type="method"}}
+						{{#autoForm id="insertParamForm" collection="CyoaParams"  meteormethod="addParam" type="method"}}
 								{{> afQuickField name="title"}}
-								{{> afQuickField name="data"}}
+<!-- 								{{> afQuickField name="data"}} -->
 							<!--	{{> afQuickField name="data"}} label="Data-value"}} label="Data-title"}}
 								{{> afQuickField name="data-value"}}-->
 								{{> afQuickField name="cyoaid" value=cyoa_id}}
@@ -67,6 +69,85 @@
 				</div>
 			</div>
 		</div>
+	</div>
+</template>
+<template name="param_edit_form">
+	<div class="modal fade" id="param_edit_form">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group">
+						{{#with param}}
+							<h1>{{> editableText collection="cyoaParams" field="title"}}
+							<a href="#" data-data-index="{{data_index}}" class="glyphicon glyphicon-minus js-remove-param" style="color:red;"></a></h1>
+							{{#each data}}
+								{{#let data_index=@index}} <!--  context=.. -->
+									<div>
+										<a href="#" data-data-index="{{data_index}}" class="glyphicon glyphicon-minus js-remove-data" style="color:red;"></a>
+										{{> editableText context=.. collection='cyoaParams' field=(get_name data_index)}}: 
+										{{#each values data_index}}
+											{{#let value_Index=@index}}
+												<span style="color:#f00;" contenteditable="true" class="js-editable-value" data-data-index="{{data_index}}" data-value-index="{{value_Index}}" data-clicked="false">
+													{{this}}
+												</span>, 
+<!-- 													EDITABLE:{{> editableText context=.. collection='cyoaParams' field='(get_value data_index value_Index)'}}:TEXT, -->
+											{{/let}}
+										{{/each}}
+										<a href="#" data-data-index="{{data_index}}" class="glyphicon glyphicon-plus js-add-value"></a>
+									</div>
+								{{/let}}
+							{{/each}}
+								<a href="#" class="glyphicon glyphicon-plus js-add-data"></a>
+<!-- 							{{#each data}} -->
+<!-- 										{{> editableText context=.. collection='cyoaParams' field=(get_name 0)}}:  -->
+<!-- 							{{#each value 0}} -->
+<!-- 							{{this}} -->
+<!-- 								{{#let value_Index=@index}} -->
+<!-- 									<div style="color:#0f0;"> -->
+<!-- 									{{get_value 0 value_Index}} -->
+<!-- 										{{> editableText context=.. collection='cyoaParams' field=(get_value 0 value_Index)}}, -->
+<!-- 									</div> -->
+<!-- 								{{/let}} -->
+<!-- 							{{/each}} -->
+<!-- 							{{/each}} -->
+<!-- 							{{> editableText context=.. collection='cyoaParams' field=(get_value 0 1)}}, -->
+						{{/with}}
+<!-- 						{{#autoForm id="updateParamForm" type="update" collection=CyoaParams.data doc=exampleDoc setArrayItems=true}} -->
+						
+
+						
+<!-- 							{{> afQuickField name="data.size=get_data_size.name"}} -->
+<!-- 							{{> afQuickField name="data.{{get_data_size}}.value"}} -->
+<!-- 						 -->
+<!-- 						{{#autoForm id="updateParamForm" collection="CyoaParams" type="update"}} -->
+<!-- 								{{> afQuickField name="title"}} -->
+<!-- 								{{> afQuickField name="data"}} -->
+<!-- 								{{> afArrayField name="data" label="data"}} -->
+<!-- 								{{> afQuickField name="data-title" label="title"}} -->
+<!-- 								{{> afQuickField name="data-value" label="value"}} -->
+<!-- 								{{> afQuickField name="data-value" label="value"}} -->
+<!-- 								{{> afQuickField name="data-title" label="title"}} -->
+<!-- 								{{> afQuickField name="data-value" label="value"}} -->
+							<!--	{{> afQuickField name="data"}} label="Data-value"}} label="Data-title"}}
+								{{> afQuickField name="data-value"}}-->
+<!-- 								{{> afQuickField name="cyoaid" value=cyoa_id}} -->
+<!-- 								<div class="form-group"> -->
+<!-- 									<button type="submit" class="btn btn-primary js-btn js-btn-addparam-field">Submit</button> -->
+<!-- 								</div> -->
+<!-- 								disabled="{{disableButtons}}" -->
+<!-- 							{{/autoForm}} -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+<template name="paramlist">
+	<div>
+		{{#each param}}
+<!-- 		<span class="js-page-choises css-page-choises {{readyORnot}}">{{title}}</span> -->
+			<a href="#" class="js-paramItem">{{title}}, </a>
+		{{/each}}
 	</div>
 </template>
 <!--

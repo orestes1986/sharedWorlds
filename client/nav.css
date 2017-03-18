@@ -16,3 +16,14 @@
 /* 	border:1px solid green; */
 	color: #000;
 }
+/*.css-navbar{
+	position: fixed;
+	z-index:5;
+}*/
+.css-navbar-left {
+	margin-left: 10%;
+}/*
+.css-navbar-right {
+	border:1px solid green;
+	margin-left: 10%;
+}*/

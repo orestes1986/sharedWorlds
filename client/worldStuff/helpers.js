@@ -1,6 +1,39 @@
 ////////
 /// World	HELPERS
 ////////
+
+
+
+
+Template.foo.helpers({
+  settings: function() {
+    return {
+      position: "top",
+      limit: 5,
+      rules: [
+        {
+          token: '@',
+          collection: Meteor.users,
+//           collection: Tags,
+          field: "username",
+          template: Template.userPill
+        },
+        {
+          token: '!',
+          collection: Tags,
+          field: "_id",
+          options: '',
+          matchAll: true,
+          filter: { type: "autocomplete" },
+          template: Template.dataPiece
+        }
+      ]
+    };
+  }
+});
+
+
+
 Template.worldList.rendered = function() {
 	Meteor.worldFunctions.worldInit();
 };
@@ -26,6 +59,9 @@ Template.worldMeta.helpers({
 // 		console.log("worldid");
 // 		console.log(Worlds.findOne({_id:Session.get("worldid")}));
 		return Worlds.findOne({_id:Session.get("worldid")});
+	},
+	get_tag_name: function() {
+		return Tags.findOne({_id:this.toString()}).genre;
 	},
 	ownerUserName : function() {
 // 		console.log("ownerUserName");
@@ -72,13 +108,16 @@ Template.world.helpers({
 	get_color:function() {
 		var colors = ["#589"];
 		if (this.tags) {
-			for (var j = 0; j < colorsTOtags.length; j++) {
+// 			for (var j = 0; j < colorsTOtags.length; j++) {
 				for (var i = 0; i < this.tags.length; i++){
-					if (this.tags[i].toUpperCase() == colorsTOtags[j].genre.toUpperCase()) {
-						colors.push(colorsTOtags[j].color);
+					var tmpFoundedTags = Tags.findOne({_id:this.tags[i]});
+// 					if (this.tags[i].toUpperCase() == colorsTOtags[j].genre.toUpperCase()) {
+					if (tmpFoundedTags.color) {
+						colors.push(tmpFoundedTags.color);
 					}
+// 					}
 				}
-			}
+// 			}
 		} else {
 			colors.push("#567890", "#098765");
 		}
@@ -114,13 +153,16 @@ Template.worldItem.helpers({
 		var world = Worlds.findOne({_id:Session.get("worldid")});
 		if (world) {
 			if (world.tags) {
-				for (var j = 0; j < colorsTOtags.length; j++) {
+// 				for (var j = 0; j < colorsTOtags.length; j++) {
 					for (var i = 0; i < world.tags.length; i++){
-						if (world.tags[i].toUpperCase() == colorsTOtags[j].genre.toUpperCase()) {
-							colors.push(colorsTOtags[j].color);
+						var tmpFoundedTags = Tags.findOne({_id:world.tags[i]});
+// 						if (world.tags[i].toUpperCase() == colorsTOtags[j].genre.toUpperCase()) {
+						if (tmpFoundedTags.color) {
+							colors.push(tmpFoundedTags.color);
 						}
+// 						}
 					}
-				}
+// 				}
 			} else {
 				colors.push("#567890", "#098765");
 			}

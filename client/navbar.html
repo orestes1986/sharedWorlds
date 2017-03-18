@@ -13,12 +13,10 @@
 <template name="navbar-plain">
 	<div class="container">
 	<div class="row css-navbar">
-		<!--<span class="navbar-left css-navbar-left css-plain-nav">
-			{{#if currentUser}}
-				<a href="/account/{{currentUser._id}}">{{currentUser.username}}</a>
-			{{/if}}
-		</span>-->
-		<span class="navbar-right css-plain-nav">
+		<span class="navbar-left css-navbar-left css-plain-nav">
+			<a href="/"><h1>Logo</h1></a>
+		</span>
+		<span class="navbar-right css-navbar-right css-plain-nav">
 			{{> loginButtons}}
 <!-- 			<a href="/account/{{currentUser._id}}">{{> loginButtons}}</a> -->
 	<!-- 		{{> loginButtonsCustomised}} -->

@@ -29,19 +29,26 @@ Meteor.methods({
 		var realCyoa = Cyoas.findOne({_id:cyoa._id});
 		if (realCyoa){
 			if (realCyoa.owner == this.userId) {
-			Cyoas.update({_id: realCyoa._id}, {$set:{title:realCyoa.title, url:realCyoa.url, lastEdit:new Date()}});
-			var ev = Events.findOne({_id: realCyoa.eventid});
-			Events.update({_id: ev._id}, {$set:{lastEdit:new Date()}});
-			Worlds.update({_id: ev.worldid}, {$set:{lastEdit:new Date()}});
+				Cyoas.update({_id: realCyoa._id}, {$set:{title:realCyoa.title, url:realCyoa.url, lastEdit:new Date()}});
+				var ev = Events.findOne({_id: realCyoa.eventid});
+				Events.update({_id: ev._id}, {$set:{lastEdit:new Date()}});
+				Worlds.update({_id: ev.worldid}, {$set:{lastEdit:new Date()}});
 			}
 		}
 	},
 	// removing events
-	removeCyoa:function(cyoa){
-		var realCyoa = Cyoas.findOne({_id:cyoa._id});
+	removeCyoa:function(cyoaid){
+			console.log("Deleting Cyoa");
+			console.log(Cyoas.findOne({_id:cyoaid}));
+			console.log(cyoaid);
+		var realCyoa = Cyoas.findOne({_id:cyoaid});
 		if (realCyoa){
+			console.log("Cyoa is real");
 			var eventid = realCyoa.eventid;
+			console.log(realCyoa.owner);
+			console.log(this.userId);
 			if (realCyoa.owner == this.userId) {
+			console.log("User is owner");
 				var ev = Events.findOne({_id: realCyoa.eventid});
 				console.log(ev._id);
 				Pages.remove({cyoaid:realCyoa._id});

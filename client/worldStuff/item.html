@@ -1,5 +1,5 @@
 <template name="worldItem">
-	<div id="wholeBG" style="
+	<div class="wholeBG" style="
 	background-color: {{get_color.[0]}};
 	background: -webkit-linear-gradient({{get_color}});
 	background: -o-linear-gradient({{get_color}});
@@ -19,17 +19,20 @@
 <!-- 	<h1 class="js-edit-text">{{title}} </h1> -->
 	<div><p>
 		{{#each tags}}
-			<span style="border-style: solid;
+			<a href="/genre/{{this}}"><span style="border-style: solid;
 			border-radius: 10%;
 			background-color: #674ea7;
 			color: #fff2cc;
-			padding: 2px;">
-				{{this}}
-			</span>
+			padding: 2px;
+			margin: 2px;">
+				{{get_tag_name}}
+			</span></a>
 		{{/each}}</p>
-	<p>
-		World's owner: <a href="/account/{{owner}}" class="css-link">{{ownerUserName}}</a>
-	</p>
+	{{#if owner}}
+		<p>
+			World's owner: <a href="/account/{{owner}}" class="css-link">{{ownerUserName}}</a>
+		</p>
+	{{/if}}
       <div class="css-description-area editable-text-trigger">World descryption: 
 <!--       <textarea class="css-description-area js-edit-text">{{descripion}}</textarea> -->
 			{{> editableText options=optionsHelper}}

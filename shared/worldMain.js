@@ -14,13 +14,35 @@ Meteor.methods({
 // 		return;
 // 	},
 	// adding new worlds
+/*	
+	
+	db.tasks.find({ "$and": [
+   {"color": {
+       "$all": [ "e4oqPeoBTJtCpG53K", "cvmQv7vQHunPnmqPz" ]
+   },
+   { "color": { "$size": 2 } }
+	
+	*/
 	addWorld:function(world){
 		console.log("addWorld entered:");
 //		 console.log(world);
 		if (!this.userId){// not logged in
 			return;
 		} else {
-		var addingWorld = ({title:world.title, description:world.description, tags:world.tags, owner:this.userId, advSum:0, createdOn:new Date(), lastEdit:new Date()});
+			var tagIds = [];
+			for (var i = 0;  i < world.tags.length; i++) {
+				var tmpTag = Tags.findOne({genre: world.tags[i]});
+				if (!tmpTag) {
+					tagIds.push(Tags.insert({ genre: world.tags[i] }));
+				} else {
+					tagIds.push(tmpTag._id);
+				}
+				console.log("tagIds");
+				console.log(tagIds);
+			}
+			console.log(world.tags);
+			console.log(tagIds);
+		var addingWorld = ({title:world.title, description:world.description, tags:tagIds, owner:this.userId, advSum:0, createdOn:new Date(), lastEdit:new Date()});
 //			 console.log(addingWorld);
 			var id = Worlds.insert(addingWorld);
 			console.log("addWorld method: got an id "+id);

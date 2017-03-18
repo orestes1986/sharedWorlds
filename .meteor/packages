@@ -34,6 +34,7 @@ twbs:bootstrap
 yogiben:autoform-tags
 jorisbontje:vis
 templates:forms
-babrahams:editable-text-wysiwyg-bootstrap-3
 froala:editor
 ian:accounts-ui-bootstrap-3
+mizzao:autocomplete
+babrahams:editable-text-wysiwyg-bootstrap-3

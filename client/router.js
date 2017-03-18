@@ -19,6 +19,12 @@ Router.route('/worlds/:_id', function () {
 	this.render("worldItem", {to:"main"});	
 });
 */
+// 'DEMO' page
+Router.route('/demo', function () {
+// 	console.log("you hit / ");
+	this.render("navbar-plain", {to:"header"});
+	this.render("demotemplate", {to:"main"});	
+});
 
 // 'HOME' page
 Router.route('/', function () {
@@ -46,6 +52,17 @@ Router.route('/account/:_id', function () {
 	this.render("userItem", {to:"main"});	
 });
 // 'HOME' page
+Router.route('/genre/:_id', function () {
+// 	console.log("you hit / ");
+	Session.set("worldid", "none");
+	Session.set("eventid", "none");
+	Session.set("cyoaid", "none");
+	Session.set("pageid", "none");
+	Session.set("genreid", this.params._id);
+	this.render("navbar-plain", {to:"header"});
+	this.render("genreItem", {to:"main"});	
+});
+// 'HOME' page
 Router.route('/account', function () {
 // 	console.log("you hit / ");
 	Session.set("worldid", "none");
@@ -63,8 +80,6 @@ Router.route('/worlds/:_id', function () {
 	Session.set("eventid", "none");
 	Session.set("cyoaid", "none");
 	Session.set("pageid", "none");
-	Session.set("worldBegins", 0);
-	Session.set("worldEnds", 1);
 	var world = Worlds.findOne({_id:Session.get("worldid")});
 	if (world) {
 		Session.set("worldEvents", Events.find({worldid:Session.get("worldid")}).fetch());
@@ -74,19 +89,10 @@ Router.route('/worlds/:_id', function () {
 			sort:{start: 1}
 		}).fetch();
 		var worldEventsEnding = Events.find({
-				worldid:Session.get("worldid")
-			}, {
-				sort:{end: 1}
-			}).fetch();
-		if (Session.get("worldEvents").length > 0) {
-			Session.set("worldBegins", worldEventsBegining[0].start);
-			if (worldEventsEnding[worldEventsEnding.length-1].end) {
-			Session.set("worldEnds", worldEventsEnding[worldEventsEnding.length-1].end);
-			} else {
-			Session.set("worldEnds", worldEventsEnding[worldEventsEnding.length-1].start);
-			}
-			// 			console.log(Session.get("worldEnds"));
-		}
+			worldid:Session.get("worldid")
+		}, {
+			sort:{end: 1}
+		}).fetch();
 	}
 	this.render("navbar-plain", {to:"header"});
 	this.render("worldItem", {to:"main"});

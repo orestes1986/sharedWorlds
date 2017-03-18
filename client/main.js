@@ -2,6 +2,7 @@
 
 ////////////////
 Meteor.subscribe("userData");
+Meteor.subscribe("tags");
 ////////////////
 // subscribe to read WORLD data
 ////////////////
@@ -20,8 +21,8 @@ Meteor.subscribe("eventComments");
 Meteor.subscribe("cyoas");
 Meteor.subscribe("cyoaEditingUsers");
 Meteor.subscribe("cyoaComments");
-Meteor.subscribe("cyoaParams");
 ////////////////
+Meteor.subscribe("cyoaParams");
 Meteor.subscribe("pages");
 ////////////////
 /////////

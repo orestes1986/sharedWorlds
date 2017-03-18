@@ -5,6 +5,7 @@
 	<div class="container css-the-worlds">
 		<div class="row css-the-world-list">
 			{{>world_add_form}}
+<!-- 			{{>foo}} -->
 			{{#each worlds}}
 			{{> each_world}}
 			{{/each}}
@@ -60,4 +61,19 @@
 			</div>
 		</div>
 	</div>
+</template>
+
+
+<template name="foo">
+    ... stuff
+    {{> inputAutocomplete settings=settings id="msg" class="input-xlarge" placeholder="Chat..."}}
+    ... more stuff
+</template>
+
+<template name="bar">
+    ... stuff
+    {{#textareaAutocomplete settings=settings id="msg"}}
+        {{myStartingText}}
+    {{/textareaAutocomplete}}
+    ... more stuff
 </template>
