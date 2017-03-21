@@ -15,10 +15,12 @@
 //
 // db.cyoaParams.update({}, {$pull:{data:{name:"Another data name"}}})
 
+
 // method definitions
 Meteor.methods({
 	addParam:function(param) {
-// 		console.log("Entered  addParam");
+		console.log("Entered  addParam");
+		console.log(param);
 		if (!this.userId){// not logged in
 			return;
 		} else {
@@ -28,7 +30,18 @@ Meteor.methods({
 			var cyoa = Cyoas.findOne({_id: param.cyoaid});
 			if (cyoa) {
 // 				console.log(cyoa._id);
-				var addingParam = ({title:param.title, data:[{name: "A Parameter",/* value: "dummy Value", */ values:["A dummy value"]}], cyoaid:cyoa._id, owner:this.userId});
+				var addingParam = (
+					{ title: param.title,
+						data: [ 
+							{ 
+							name: "A Parameter",
+							values: [
+								{ value: "dummy Value", pageid: param.pageid }
+							]
+							}
+						], 
+						cyoaid:cyoa._id, owner:this.userId
+					});
 				var paramid = CyoaParams.insert(addingParam);
 // 				console.log(paramid);
 				Meteor.call("updateCyoa", cyoa);
@@ -39,29 +52,32 @@ Meteor.methods({
 			}
 		}
 	},
-	updateParam:function(param){
-// 		console.log("Entered  updateParam");
-		var realParam = CyoaParams.findOne({_id:param._id});
-		if (realParam){
-			if (realParam.owner == this.userId) {
-				var cyoa = Cyoas.findOne({_id: param.cyoaid});
-// 				var updatingPage = ({title:param.title, parentid:param.parentid, cyoaid:param.cyoaid, owner:this.userId});
-				CyoaParams.update({_id: param._id}, {$set:{title:param.title, body:param.body, parentid:param.parentid, cyoaid:param.cyoaid}});
-				Meteor.call("updateCyoa", cyoa);
-			}
-		}
-	},
+// 	updateParam:function(param){
+// // 		console.log("Entered  updateParam");
+// 		var realParam = CyoaParams.findOne({_id:param._id});
+// 		if (realParam){
+// 			if (realParam.owner == this.userId) {
+// 				var cyoa = Cyoas.findOne({_id: param.cyoaid});
+// // 				var updatingPage = ({title:param.title, parentid:param.parentid, cyoaid:param.cyoaid, owner:this.userId});
+// 				CyoaParams.update({_id: param._id}, {$set:{title:param.title, body:param.body, parentid:param.parentid, cyoaid:param.cyoaid}});
+// 				Meteor.call("updateCyoa", cyoa);
+// 			}
+// 		}
+// 	},
 	// removing worlds
 	removeParam:function(param){
-// 		console.log("removeParam method");
-//		 console.log(param);
+		console.log("removeParam method");
+		 console.log("param");
+		 console.log(param);
 		var realParam = CyoaParams.findOne({_id:param._id, owner:this.userId});
 		if (realParam){
+			console.log("realParam");
+			console.log(realParam);
 // 			Events.remove({worldid:realWorld._id});
 			CyoaParams.remove({_id: realParam._id});
 		}
 	},
-	addParamField:function(param){
+	addParamField:function(param, pageid){
 		console.log("Entered  addParamField");
 		console.log(param);
 		var realParam = CyoaParams.findOne({_id:param._id});
@@ -74,7 +90,7 @@ Meteor.methods({
 				var dataIndex = realParam.data.length;
 				console.log(dataIndex);
 				var setModifier = { $set: {} };
-				var value = {name: "Another Parameter", values:["A dummy value"]};
+				var value = {name: "Another Parameter", values: [ { value:"A dummy value", pageid: pageid } ]};
 				setModifier.$set['data.' + dataIndex ] = value;
 				console.log(setModifier);
 				CyoaParams.update({_id:realParam._id}, setModifier);
@@ -102,7 +118,7 @@ Meteor.methods({
 			}
 		}
 	},
-	addParamFieldValue:function(param, dataIndex){
+	addParamFieldValue:function(param, dataIndex, pageid){
 		console.log("Entered  addParamFieldValue");
 		console.log(param);
 		console.log(dataIndex);
@@ -115,7 +131,7 @@ Meteor.methods({
 // 				var updatingPage = ({title:param.title, parentid:param.parentid, cyoaid:param.cyoaid, owner:this.userId});
 				var valueIndex = realParam.data[dataIndex].values.length;
 				var setModifier = { $set: {} };
-				setModifier.$set['data.' + dataIndex + '.values.'+valueIndex] = "Another value";
+				setModifier.$set['data.' + dataIndex + '.values.'+valueIndex] = { value: "Another value", pageid: pageid };
 // 				console.log(setModifier);
 				CyoaParams.update({_id:realParam._id}, setModifier);
 				Meteor.call("updateCyoa", cyoa);
@@ -123,29 +139,36 @@ Meteor.methods({
 		}
 	},
 	updateParamFieldValue:function(param, dataIndex, valueIndex, updating){
-// 		console.log("Entered  updateParamFieldValue");
+		console.log("Entered  updateParamFieldValue");
 // 		updating = updating.replace(/(\r\n|\n|\r)/gm," ");
-// 		console.log(updating);
+		console.log(updating);
 		var realParam = CyoaParams.findOne({_id:param._id});
 		if (realParam){
+			console.log(realParam);
 			if (realParam.owner == this.userId) {
 				if ((updating != "") && (updating != " ") && (updating != " ")) {
-					if (realParam.data[dataIndex].values[valueIndex] != updating) {
-// 						console.log("it IS different");
+					if (realParam.data[dataIndex].values[valueIndex].value != updating) {
+						console.log("it IS different");
 						var cyoa = Cyoas.findOne({_id: param.cyoaid});
 		// 				var updatingPage = ({title:param.title, parentid:param.parentid, cyoaid:param.cyoaid, owner:this.userId});
 						
 						var setModifier = { $set: {} };
-						setModifier.$set['data.' + dataIndex + '.values.'+valueIndex] = updating;
+						setModifier.$set['data.' + dataIndex + '.values.'+valueIndex+".value"] =  updating;
 // 						console.log(setModifier);
 						CyoaParams.update({_id:realParam._id}, setModifier);
 						Meteor.call("updateCyoa", cyoa);
+// 						if (Meteor.isClient) {
+// 							$("#param_edit_form").modal('hide');
+// 						}
 					} else {
 						console.log("it is NOT different");
 						return false;
 					}
 				} else {
 						Meteor.call("removeParamFieldValue", param, dataIndex, valueIndex, updating);
+// 						if (Meteor.isClient) {
+// 							$("#param_edit_form").modal('hide');
+// 						}
 				}
 			}
 		}

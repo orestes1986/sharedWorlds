@@ -2,6 +2,8 @@
 /// cyoa	EVENTS
 ////////
 
+// Session.get("pageid") 
+
 Template.deleteCyoa.events({
 	// remove world button
 	"click .js-remove-cyoa":function(event){
@@ -21,6 +23,11 @@ Template.addParam.events({
 // 		console.log("showing the modal...");
 		$("#param_add_form").modal('show');
 	},
+	'submit #param_add_form':function(event){
+		console.log("param_add_form submited...");
+		console.log(event);
+// 		$("#param_edit_form").modal('hide');
+	},
 });
 
 Template.paramlist.events({
@@ -35,80 +42,58 @@ Template.param_edit_form.events({
 // 		console.log("param_edit_form...");
 		$("#param_edit_form").modal('hide');
 	},
+	'click .js-editable-value': function(event){
+		$(event.currentTarget).attr("contentEditable", true);
+	},
 	'click #param_edit_form': function(event){
+		console.log("#param_edit_form");
 		var editableElements = document.getElementsByClassName("js-editable-value");
 		for (var i = 0; i < editableElements.length; i++) {
-			if (editableElements[i].getAttribute("data-clicked") == 'true') {
-// 				console.log("Found an edited One");
+// 			if (editableElements[i].getAttribute("data-clicked") == 'true') {
+			if (!editableElements[i].textContent.isContentEditable){
+				console.log("Found an edited One");
 // 				console.log(editableElements[i]);
-					
 				var text = editableElements[i].textContent;//.replace(/(\r\n|\n|\r)/gm,"");
-// 				console.log(text);
 				text = String(text).replace(/(\r\n|\n|\r)/gm,"");
-// 				console.log(text); 
 				text=String(text).replace(/(\t)/gm,'');
 				text=String(text).replace(" ",'');
-// 				console.log(text);
-
-		// 		console.log(this);
-		// 		console.log(this.toString());
-// 				console.log(text);
-		// 		console.log(editableElements[i].value);
 				var param = CyoaParams.findOne({_id:Session.get("paramid")});
 				var updatingFlag = Meteor.call("updateParamFieldValue", param, editableElements[i].getAttribute("data-data-index"), editableElements[i].getAttribute("data-value-index"), text);
 				if (updatingFlag) {
 		// 			console.log("js-editable-value key down");
-					editableElements[i].setAttribute("data-clicked", "false");
+					editableElements[i].textContent = param.data.editableElements[i].getAttribute("data-data-index").values.editableElements[i].getAttribute("data-value-index").value;
+// 					editableElements[i].setAttribute("data-clicked", "false");
 				}
 			}
 		}
 	},
-	'click .js-editable-value': function(event){
-// 		if (event.keyCode == 10 || event.keyCode == 13) {
-// 			event.preventDefault();
-// 			// Submit the form, etc.
-			$(event.currentTarget).attr("data-clicked", "true");
-// 		}
-	},
-	'keyup .js-editable-value': function(event){
+	'keydown .js-editable-value': function(event){
 		if (event.keyCode == 10 || event.keyCode == 13) {
+			console.log("Enter was pressed");
 			event.preventDefault();
-			// Submit the form, etc.
+			$(event.currentTarget).attr("contentEditable", false);
 			var text = $(event.currentTarget).text();//.replace(/(\r\n|\n|\r)/gm,"");
-// 				console.log(text);
-				text = String(text).replace(/(\r\n|\n|\r)/gm,"");
-// 				console.log(text);
-				text=String(text).replace(/(\t)/gm,'');
-				text=String(text).replace(" ",'');
-// 				console.log(text);
-
-// 			text = text.replace(/ +(?= )/g,'');
-// 			while (text.indexOf("  ")) {
-// 				text.replace("  ",''); 
-// 			}
-// 			while (text.indexOf("	")) {
-// 				text.replace("",''); 
-// 			}
-
-	// 		console.log(this);
-	// 		console.log(this.toString());
 // 			console.log(text);
-	// 		console.log($(event.currentTarget).val());
+			text = String(text).replace(/(\r\n|\n|\r)/gm,"");
+// 			console.log(text);
+			text=String(text).replace(/(\t)/gm,'');
+			text=String(text).replace(" ",'');
+			console.log(text);
+// 			return false;
+// Submit the form, etc.
 			var param = CyoaParams.findOne({_id:Session.get("paramid")});
 			Meteor.call("updateParamFieldValue", param, $(event.currentTarget).attr("data-data-index"), $(event.currentTarget).attr("data-value-index"), text);
-	// 		console.log("js-editable-value key down");
-			$(event.currentTarget).attr("data-clicked", "false");
 		}
 	},
 	'click .js-add-value': function(event) {
 		var param = CyoaParams.findOne({_id:Session.get("paramid")});
-		Meteor.call("addParamFieldValue", param, $(event.currentTarget).attr("data-data-index"));
+		Meteor.call("addParamFieldValue", param, $(event.currentTarget).attr("data-data-index"), Session.get("pageid"));
 // 		console.log("js-editable-value key down");
 		$(event.currentTarget).attr("data-clicked", "false");
 	},
 	'click .js-add-data': function(event) {
 		var param = CyoaParams.findOne({_id:Session.get("paramid")});
-		Meteor.call("addParamField", param);
+		Meteor.call("addParamField", param, Session.get("pageid"));
 // 		console.log("js-editable-value key down");
 		$(event.currentTarget).attr("data-clicked", "false");
 	},

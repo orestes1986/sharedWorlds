@@ -53,14 +53,40 @@
 	<div class="modal fade" id="param_add_form">
 		<div class="modal-dialog">
 			<div class="modal-content">
+				<div class="modal-header">
+					<div class="modal-title">
+					</div>
+				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						{{#autoForm id="insertParamForm" collection="CyoaParams"  meteormethod="addParam" type="method"}}
-								{{> afQuickField name="title"}}
+							{{#basicFormBlock schema=schema action=action}}
+								<p> {{> basicInput field="title"}} </p>
+								<div class="form-group">
+									<button type="submit" id="submit_doc" class="btn btn-primary" disabled="{{disableButtons}}">Submit</button>
+<!-- 									<button type="submit" id="submit_cyoa" class="btn btn-primary" disabled="{{disableButtons}}">Create a CYOA</button> -->
+								</div>
+							{{/basicFormBlock}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+<!--<template name="param_add_form">
+	<div class="modal fade" id="param_add_form">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group">
+						{{#autoForm id="insertParamForm" collection="CyoaParams" type="insert"}}
+								{{> afQuickField name="title"}}-->
+<!-- 								meteormethod="addParam" -->
 <!-- 								{{> afQuickField name="data"}} -->
 							<!--	{{> afQuickField name="data"}} label="Data-value"}} label="Data-title"}}
 								{{> afQuickField name="data-value"}}-->
-								{{> afQuickField name="cyoaid" value=cyoa_id}}
+<!--								{{> afQuickField name="cyoaid" value=cyoa_id}}
+								{{> afQuickField name="pageid" value=page_id}}
+								{{> afQuickField name="owner" value=owner}}
 								<div class="form-group">
 									<button type="submit" class="btn btn-primary js-btn" disabled="{{disableButtons}}">Submit</button>
 								</div>
@@ -70,7 +96,7 @@
 			</div>
 		</div>
 	</div>
-</template>
+</template>-->
 <template name="param_edit_form">
 	<div class="modal fade" id="param_edit_form">
 		<div class="modal-dialog">
@@ -88,10 +114,16 @@
 										<a href="#" data-data-index="{{data_index}}" class="glyphicon glyphicon-plus js-add-value"></a>
 										{{#each values data_index}}
 											{{#let value_Index=@index}}
-												<span style="color:#f00;" contenteditable="true" class="js-editable-value" data-data-index="{{data_index}}" data-value-index="{{value_Index}}" data-clicked="false">
-													{{this}}
-												</span>, 
-<!-- 													{{> editableText context=../.. collection='cyoaParams' field=(get_value data_index value_Index)}}, -->
+												{{#if is_its_page}}
+													<span style="color:#f00;" contenteditable="true" class="js-editable-value" data-data-index="{{data_index}}" data-value-index="{{value_Index}}">
+														{{this.value}}
+													</span>
+												{{else}}
+													{{this.value}}
+												{{/if}}
+												<a href="/cyoas/{{get_cyoaid}}/page/{{pageid}}">({{page_name}})</a>, 
+<!-- 												 data-clicked="false" -->
+<!--	{{> editableText context=../.. collection='cyoaParams' field=(get_value data_index value_Index)}}, -->
 											{{/let}}
 										{{/each}}
 									</div>
