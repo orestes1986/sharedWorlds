@@ -1,0 +1,42 @@
+<template name="paramlist">
+	<div>
+		{{#each param}}
+<!-- 		<span class="js-page-choises css-page-choises {{readyORnot}}">{{title}}</span> -->
+			<a href="#" class="js-paramItem">{{title}}, </a>
+		{{/each}}
+		{{>addParam}}
+	</div>
+	{{>param_add_form}}
+	{{>param_edit_form}}
+</template>
+<template name="addParam">
+{{#if currentUser}}
+	<button class="glyphicon glyphicon-plus js-show-param-form" aria-hidden="true" id="add-param-btn" title="Add Parameter">
+	</button>
+	{{/if}}
+<!-- 	<a href="#" class="js-add-page"> -->
+<!-- 	</a> -->
+</template>
+<template name="param_add_form">
+	<div class="modal fade" id="param_add_form">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="modal-title">
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+							{{#basicFormBlock schema=schema action=action}}
+								<p> {{> basicInput field="title"}} </p>
+								<div class="form-group">
+									<button type="submit" id="submit_doc" class="btn btn-primary" disabled="{{disableButtons}}">Submit</button>
+<!-- 									<button type="submit" id="submit_cyoa" class="btn btn-primary" disabled="{{disableButtons}}">Create a CYOA</button> -->
+								</div>
+							{{/basicFormBlock}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

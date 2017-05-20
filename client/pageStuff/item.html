@@ -1,0 +1,48 @@
+<template name="pageItem">
+    {{#with activePage}}
+		{{#if hasParent}}
+			<a href="/cyoas/{{cyoaid}}/page/{{parentid}}">parent</a>
+<!-- 			class="js-page-parent" -->
+		{{/if}}
+		<h2>{{> editableText collection="pages" field="title"}}</h2>
+<!-- 		<h2>{{title}}</h2> -->
+		{{> deletepage}}
+		<div class="row">
+			<div class="col-md-6">
+				{{> bodyEditor}}
+			</div>
+		</div>
+    {{/with}}
+		{{>page_add_form}}
+		{{>list_of_pages_form}}
+</template>
+<template name="deletepage">
+<!-- 	{{#if onlyPage}} -->
+		<a href="/cyoas/{{cyoaid}}" class="js-remove-page css-remove-page">
+			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+			delete page
+		</a>
+<!-- 	{{/if}} -->
+</template>
+<template name="list_of_pages_form">
+	<div class="modal fade" id="list_of_pages_form">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group">
+							{{#autoForm id="addExistingPageForm" collection="Pages"  meteormethod="updatePage" type="method"}}
+								{{> existingPageList}}
+							{{/autoForm}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+<template name="existingPageList">
+<!-- 		{{parentid}} -->
+    {{#each existingPages}}
+<!-- 		<span class="js-page-choises css-page-choises {{readyORnot}}">{{title}}</span> -->
+		<a href="#" class="css-page-choises js-page-choises {{readyORnot}}">{{title}}</a>
+    {{/each}}
+</template>

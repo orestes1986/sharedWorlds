@@ -1,0 +1,26 @@
+<template name="navbar">	
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<ul class="nav navbar-nav">
+			</ul>
+			<div class="nav navbar-nav">
+				hey
+			</div>
+		</div>
+	</nav> 
+</template>
+
+<template name="navbar-plain">
+	<div class="container">
+		<div class="row css-navbar">
+			<span class="navbar-left css-navbar-left css-plain-nav">
+				<a href="/"><h1>Logo</h1></a>
+			</span>
+			<span class="navbar-right css-navbar-right css-plain-nav">
+				{{> loginButtons}}
+	<!-- 			<a href="/account/{{currentUser._id}}">{{> loginButtons}}</a> -->
+		<!-- 		{{> loginButtonsCustomised}} -->
+			</span>
+		</div>
+	</div>
+</template>

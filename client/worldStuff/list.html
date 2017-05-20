@@ -1,0 +1,81 @@
+<template name="worldList">
+<!--	 <h1>The worlds: </h1> -->
+	<div class="css-black-bg">
+	</div>
+	<div class="container css-the-worlds">
+		<div class="css-worlds-bg">
+		</div>
+		<div class="row css-the-world-list">
+			{{>world_add_form}}
+<!-- 			{{>foo}} -->
+			{{#each worlds}}
+			{{> each_world}}
+			{{/each}}
+			{{> addWorld}}
+		</div>
+	</div>
+</template>
+<template name="each_world">
+			{{> world _id=_id sum_of_adv=advSum title=title desc=description tags=tags}}
+</template>
+<template name="world">
+	<span class="css-world col-xs-12 col-sm-6 col-md-4 col-lg-3" style="
+	height:{{get_world_size}}px;
+	padding-left:{{get_random}}px;
+	padding-top:{{get_random}}px;">
+<!-- 	<span class="css-world col-xs-12 col-sm-6 col-md-4 col-lg-3"> -->
+	<a href="/worlds/{{_id}}" id="{{_id}}" class="css-world-content js-show-world-info" style="
+	background-color: {{get_color.[0]}};
+	background: -webkit-linear-gradient({{get_color}});
+	background: -o-linear-gradient({{get_color}});
+	background: -moz-linear-gradient({{get_color}});
+	background: linear-gradient({{get_color}});
+	height:{{get_size}}px;
+	width:{{get_size}}px;
+	"
+	data-sum_of_advs="{{sum_of_adv}}">
+			<h5 class="css-world-title">{{{title}}}</h5><p>{{{desc}}}</p>
+	</a>
+	</span>
+</template>
+
+<template name="addWorld">
+	{{#if currentUser}}
+		<button class="btn btn-lg css-adding-btn glyphicon glyphicon-plus js-show-world-form" aria-hidden="true">
+		</button>
+	{{/if}}
+ <!-- <a href="#" class="js-add-world">
+	</a>-->
+</template>
+<template name="world_add_form">
+	<div class="modal fade" id="world_add_form">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="modal-title">
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						{{> quickForm collection="Worlds" id="new-world" meteormethod="addWorld" type="method"}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+
+<template name="foo">
+    ... stuff
+    {{> inputAutocomplete settings=settings id="msg" class="input-xlarge" placeholder="Chat..."}}
+    ... more stuff
+</template>
+
+<template name="bar">
+    ... stuff
+    {{#textareaAutocomplete settings=settings id="msg"}}
+        {{myStartingText}}
+    {{/textareaAutocomplete}}
+    ... more stuff
+</template>

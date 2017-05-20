@@ -1,0 +1,13 @@
+<template name="genreItem">
+	{{#with user}}
+	<div class="container css-user-page">
+		<div class="row css-user-stuff">
+		{{> userInfo}}
+		{{> userWorlds}}
+		{{> userCyoas}}
+		{{> userBooks}}
+		{{> userLikes}}
+		</div>
+	</div>
+	{{/with}}
+</template>

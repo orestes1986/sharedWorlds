@@ -1,0 +1,108 @@
+<template name="gameAdvItem">
+	{{#with gameAdv}}
+		<div class="css-black-bg">
+		</div>
+		<div class="container top-margin">
+			<div class="row">
+				<div class="col-md-12">
+					{{> gameAdvMeta}}
+				</div>
+				{{> gamePageItem}}
+			</div>
+		</div>
+	{{/with}}
+</template>
+<template name="gameParamlist">
+	<div class="modal fade" id="gameParamlist">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					{{#each params}}
+						{{#with param}}
+							<a href="#" class="js-show-specific-parameter" data-param-id="{{this._id}}">{{this.title}}</a>, 
+						{{/with}}
+						<!-- {{#let paramIndex=this.paramIndex paramValueIndex=this.paramValueIndex}}
+							{{#with param}}
+								{{this._id}}
+								{{this.data[paramIndex].name}}
+								{{paramValueIndex}}<br />
+							{{/with}}
+						{{/let}} -->
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+<template name="gameParamItem">
+	<div class="modal fade" id="gameParamItem">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					{{#each params}}
+						<p>
+							<b>{{this.name}}</b>: <i>{{this.value}}</i>,
+						</p>
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+<template name="gamePageItem">
+	{{#with player}}
+		{{#if hasParams}}
+			<div class="col-md-12">
+				<a href="#" class="js-show-param-list"> Parameters</a>
+				{{>gameParamlist}}
+				{{>gameParamItem}}
+			</div>
+		{{/if}}
+		<div class="col-md-12 css-body-player-time">
+			{{get_time}}
+		</div>
+		{{#with pageBody}}
+			{{#let bodyid=this._id}}
+				<br />
+				<div style="margin: 15%; color: #000; background-color:#888; min-height:450px;" class="css-game-body-n-choices">
+					<div class="css-game-body">
+						{{{get_texts}}}
+					</div>
+					<div class="css-game-choices">
+						{{#each choices}}
+							<a href="#" class="css-page-choises js-next-page">
+								<a href="#" class="css-body-choice">{{get_choice_value bodyid}}</a>
+							</a>
+						{{/each}}
+					</div>
+					{{>interuptionBody}}
+				</div>
+			{{/let}}
+		{{/with}}
+	{{/with}}
+</template>
+<template name="interuptionBody">
+	{{#each interruption}}
+		{{#let interuptbodyid=this._id}}
+			<div class="css-game-interrupt-body">
+				{{{get_texts}}}
+			</div>
+			<div class="css-game-interrupt-choices">
+				{{#each interuptChoices}}
+					<a href="#" class="css-page-interrupt-choises js-next-page">
+						<a href="#" class="css-body-interrupt-choice">{{get_choice_value interuptbodyid}}</a>
+					</a>
+				{{/each}}
+			</div>
+		{{/let}}
+	{{/each}}
+</template>
+<template name="gameAdvMeta">
+	{{#with activeWorld}}
+		<h2><a href="/worlds/{{_id}}" class="css-cyoa-world-link">{{title}}</a></h2>
+		<p>
+			World's owner: <a href="/account/{{owner}}" class="css-link">{{ownerUserName}}</a>
+		</p>
+	{{/with}}
+<!-- 	<h1 style="color:white;">{{> editableText collection="cyoas" field="title"}}</h1> -->
+</template>

@@ -1,0 +1,64 @@
+<template name="cyoaItem">
+	{{#with adventures}}
+		<div class="css-black-bg">
+		</div>
+		<div class="container top-margin">
+			<div class="row">
+				<div class="col-md-12">
+					{{> constantPages}}
+				</div>
+				<div class="col-md-12">
+					{{> cyoaMeta}}
+				</div>
+			</div>
+		</div>
+	{{/with}}
+</template>
+
+<template name="constantPages">
+	<script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
+	<link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet" type="text/css"/>
+	<div id="constantPages">
+		<div id="visualization">
+<!-- 			{{>event_add_form}} -->
+		</div>
+		<div id="constantPages_display">
+<!-- 		{{>constantPageItem}} -->
+		</div>
+	</div>
+</template>
+<template name="cyoaMeta">
+	{{#with activeWorld}}
+		<h2><a href="/worlds/{{_id}}" class="css-cyoa-world-link">{{title}}</a></h2>
+		<p>
+			World's owner: <a href="/account/{{owner}}" class="css-link">{{ownerUserName}}</a>
+		</p>
+	{{/with}}
+<!-- 	{{#with adventures}} -->
+		{{#if isOwner}}
+			<h1 style="color:#999;">{{> editableText collection="cyoas" field="title"}}</h1>
+		{{else}}
+			<h1 style="color:#999;">{{title}}</h1>
+		{{/if}}
+		<p>
+			Adventure's owner: <a href="/account/{{owner}}" class="css-link">{{ownerUserName}}</a>
+		</p>
+		<p>
+			{{> gameAdvList}}
+		</p>
+		{{#if isOwner}}
+		<div>
+			<a href="/cyoas/{{_id}}/list">Show all pages</a>
+			<div class="col-md-12">
+				{{>paramlist}}
+			</div>
+		</div>
+		<br />
+			{{>pageItem}}
+		{{/if}}
+		{{#each constantPages}}
+			{{checkConstantPageSum}}
+		{{/each}}
+<!-- 	{{/with}} -->
+<!-- 	<h1 style="color:white;">{{> editableText collection="cyoas" field="title"}}</h1> -->
+</template>

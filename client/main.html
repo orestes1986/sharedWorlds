@@ -1,0 +1,13 @@
+<template name="ApplicationLayout">
+<head>
+	<title>wikiWorlds</title>
+</head>
+		{{> yield "header"}}
+
+		{{> yield "main"}}
+			<div style="margin-right: 10%; width: 300px; float: right;">
+				{{> flashMessages}}
+			</div>
+
+
+</template>

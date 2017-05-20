@@ -1,0 +1,120 @@
+<template name="bodyEditor">
+	<div class="container">
+		<div class="row">
+			<div>{{> addBody}}</div>
+			<div>{{> condition_select_form}}{{> condition_select_value}}</div>
+			{{#each bodies}}
+				{{#let activebodyid = this._id}}
+<!-- 					{{>list_of_pages_form activebodyid=activebodyid}} -->
+				<!--       <div class="css-description-area editable-text-trigger">Pages content: {{> editableText options=optionsHelper}}</div> -->
+					<span class="css-body js-pages-body col-xs-12 col-sm-12 col-md-12 col-lg-12" data-this-id="{{this._id}}">
+							<div>
+								<span>Conditions: {{> conditionList}}</span><span class="css-body-time">Time:
+								{{#with get_time activebodyid}}
+<!-- 									{{overall}}  -->
+									{{wholeDate}}
+									{{#if this.centuries}}
+										<input type="number" class="js-editable-time css-editable-time" id="time-centuries" value="{{this.centuries}}"> Centuries,
+									{{/if}}
+									{{#if this.decades}}
+										<input type="number" class="js-editable-time css-editable-time" id="time-decades" value="{{this.decades}}"> Decades,
+									{{/if}}
+									{{#if this.years}}
+										<input type="number" class="js-editable-time css-editable-time" id="time-years" value="{{this.years}}"> Years,
+									{{/if}}
+									{{#if this.months}}
+										<input type="number" class="js-editable-time css-editable-time" id="time-months" value="{{this.months}}"> Months,
+									{{/if}}
+									{{#if this.weeks}}
+										<input type="number" class="js-editable-time css-editable-time" id="time-weeks" value="{{this.weeks}}"> Weeks,
+									{{/if}}
+									{{#if this.days}}
+										<input type="number" class="js-editable-time css-editable-time" id="time-days" value="{{this.days}}"> Days,
+									{{/if}}
+									{{#if this.hours}}
+										<input type="number" class="js-editable-time css-editable-time" id="time-hours" value="{{this.hours}}"> Hours, 
+									{{/if}}
+									{{#if this.minutes}}
+										<input type="number" class="js-editable-time css-editable-time" id="time-minutes" value="{{this.minutes}}"> Minutes,
+									{{/if}}
+									{{#if this.seconds}}
+										<input type="number" class="js-editable-time css-editable-time" id="time-seconds" value="{{this.seconds}}"> Seconds,
+									{{/if}}
+								{{/with}}</span>
+							</div>
+<!-- 							<div class="css-description-area editable-text-trigger"><h4>{{> editableText collection="pagesBodies" field="title"}}</h4></div> -->
+							{{#each texts}}
+								{{#let text_index=@index}}
+										{{#each paragraphs text_index}}
+										{{#let paragraph_Index=@index}}
+							<div class="css-body-area css-description-area editable-text-trigger"> {{> editableText context=../.. collection='pagesBodies' field=(get_paragraph text_index paragraph_Index) wysiwyg=true}}
+							
+<!-- 							{{> editableText context=../.. collection='cyoaParams' field=(get_value data_index value_Index)}}, -->
+ </div>
+<!-- 																			Prams:{{> editableText context=../.. collection='cyoaParams' field='data.0.values.0.value'}}, -->
+{{/let}}
+										{{/each}}{{/let}}
+										{{/each}}
+				<!-- 			<h1>This is this<br>{{this.body}}</h1> -->
+						<div class="css-remove-body">{{> removeBody}}</div><br>
+						Choices: {{> addPage bodyid=this._id}}
+						{{> choiseList bodyid=this._id}}
+					</span> 
+				<!-- 		{{body}} -->
+				{{/let}}
+			{{/each}}
+		</div>
+	</div>
+</template>
+<template name="addBody">
+	{{#if currentUser}}
+		<button class="glyphicon glyphicon-plus js-add-body">
+		</button>
+	{{/if}}
+</template>
+<template name="removeBody">
+	{{#if currentUser}}
+		<button class="glyphicon glyphicon-minus js-remove-body">
+		</button>
+	{{/if}}
+</template>
+<template name="condition_select_form">
+	<div class="modal fade" id="condition_select_form">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group">
+						{{#each param}}
+							<a href="#" class="js-param-to-choose">{{title}}, </a>
+						{{/each}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+<template name="condition_select_value">
+	<div class="modal fade" id="condition_select_value">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group">
+						{{#with param}}
+							<h1>{{title}}</h1>
+							{{#each data}}
+								{{#let data_index=@index}} <!--  context=.. -->
+									<div>
+										<b>{{this.name}}: </b>
+										{{#each values data_index}}
+											<a href="#" class="js-set-condition-value" data-data-index="{{data_index}}" data-value-index="{{@index}}">{{this.value}}, </a>
+										{{/each}}
+									</div>
+								{{/let}}
+							{{/each}}
+						{{/with}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

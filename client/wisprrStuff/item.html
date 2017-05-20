@@ -1,0 +1,63 @@
+<template name="wisprrItem">
+
+<!-- <html> -->
+	<head>
+		<link rel="shortcut icon" type="image/x-icon" href="./pics/micBook.svg" />
+		<meta charset="UTF-8">
+		<link rel="icon" type="image/png" href="./pics/micbook.png" />
+
+		<title>wikisprr ebook narator</title>
+		<script src="script/convert.js"></script>
+		<!--<script src="script/jquery-1.12.3.min.js"></script>
+		<script src="script/jquery.min.js"></script>-->
+		<meta content="">
+		<link rel="stylesheet" type="text/css" href="./style/sheet.css">
+
+		<style></style>
+	</head>
+<!-- 	<body> -->
+	<div id="headinging">
+		<a href="./">
+	    	<h1>
+	        	wikisprr
+	    	</h1>
+		</a>
+			<div id="wholeBook" style="display:none">'.file_get_contents($_REQUEST['ebook']).'</div>
+				<div id="chapters">
+				</div>
+			<div id="logs">
+	            <div id="position"><br /><br /></div>
+	        	<div id="info"><br /><br /><br /></div><!-- 1500::3.009342 -->
+	        	<div id="ref" style="display:none">
+				</div>
+		        <a href="#" onclick="plause()" id="plauseBtn">Play</a><br>
+		    </div>
+		</div>			
+		<div id="demo" ondblclick="getPosition(this)"> <pre>
+		</pre>
+	</div>
+<!--	<script>
+		var defaultAudioPath = "'.$_REQUEST['audio'].'";
+		//var defaultBookText = document.getElementById("wholeBook").innerHTML;
+		var defaultChapterNaming = "'.$_REQUEST['chap'].'";
+		var defaultChapterNumbering = "'.$_REQUEST['num'].'";
+		var defaultChapterLeaping = "'.$_REQUEST['leap'].'";
+		var refs = '.json_encode($refs).';';
+//$chapters = array();
+//while($extract0 = mysql_fetch_array($result2)) {
+	//$textiii0 = $extract0['text'];
+	//$chapteriii0 = $extract0['chapter'];
+	//if (($textiii0 != null) && ($chapteriii0 != null)) {
+	//		array_push($chapters, array($chapteriii0,$textiii0));
+	//}
+//}
+//$_REQUEST['chap']
+//$_REQUEST['num']
+
+</script>-->
+<!-- 		<script src="script/chaptering.js"></script> -->
+<!-- 		<script src="script/synch.js"></script> -->
+
+
+
+</template>

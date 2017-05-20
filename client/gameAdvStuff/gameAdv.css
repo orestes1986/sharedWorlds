@@ -1,0 +1,52 @@
+.css-game-body-n-choices {
+	position: relative;
+/* 	padding-top: 1px; */
+}
+.css-game-choices {
+	position: absolute;
+	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
+	bottom: 10px;
+}
+.css-game-body {
+	position: relative;
+	margin-top: 10px;
+	margin: 10%;
+}
+.css-body-player-time {
+	text-align: right;
+	float: right;
+	color: #fff;
+}
+.css-page-interrupt-choises {
+	display: inline-block;
+	height: 50px;
+	width:100%;
+	background-color: #fff;
+	border-style: solid white;
+	color: #333;
+	cursor:pointer;
+	margin-top:10px;
+	text-align: center;
+	vertical-align:middle;
+	border-radius: 10%;
+}
+.css-game-interrupt-choices {
+	position: relative;
+	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
+	bottom: 10px;
+	
+}
+.css-game-interrupt-body {
+	position: relative;
+	margin-top: 10px;
+	margin: 10%;
+}
+.css-body-interrupt-choice, .css-body-interrupt-choice:hover, .css-page-interrupt-choises, .css-page-interrupt-choises:hover {
+	text-decoration: none;
+	color: #333;
+	
+}

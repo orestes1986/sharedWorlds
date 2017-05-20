@@ -1,0 +1,116 @@
+<template name="choiseList">
+<!-- 		{{parentid}} -->
+	{{#let body_id=bodyid}}<br>
+<!-- 			{{body_id}} -->
+		{{#each choicePages body_id}}
+			<a href="/cyoas/{{cyoaid}}/page/{{_id}}" class="css-page-choises {{readyORnot}}">
+			{{#each parent body_id}}
+		<!-- 		<span class="js-page-choises css-page-choises {{readyORnot}}">{{title}}</span> -->
+	<!-- 			{{body_id}} -->
+				<a href="#" class="css-body-choice" style="z-index:5;">
+					{{> editableText context=.. collection='pages' field=(get_choise_value this.index)}}
+				</a>
+<!-- 			{{title}} -->
+	<!-- 		 -->
+			{{/each}}
+			</a>
+<!-- 			{{this._id}} -->
+			{{> removeChoice bodyid=body_id choiceid=this._id}}
+		{{/each}}
+	{{/let}}
+</template>
+<template name="removeChoice">
+<!-- 	{{#let body_id=bodyid}} -->
+		{{#if currentUser}}
+			<button class="glyphicon glyphicon-minus js-remove-choice css-remove-choice">
+			</button>
+		{{/if}}
+<!-- 		 data-body-id="{{bodyid}}" -->
+<!-- 	{{/let}} -->
+</template>
+<template name="addPage">
+	{{#let body_id=bodyid}}
+		{{#if currentUser}}
+			<button class="glyphicon glyphicon-plus js-show-page-form" data-body-id="{{body_id}}" aria-hidden="true" title="Add Page">
+			</button>
+		{{/if}}
+<!-- 		<a href="#" class="js-add-page"> -->
+<!-- 		</a> -->
+	{{/let}}
+</template>
+<template name="page_add_form">
+	<div class="modal fade" id="page_add_form">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group">
+						{{#basicFormBlock schema=schema action=action}}
+							<p> {{> basicInput field="title"}} </p>
+<!-- 							<p> {{> basicInput field="cyoaid" value=cyoa_id}} </p> -->
+<!-- 							<p> {{> basicInput field="parentid" value=parent_id}} </p> -->
+<!-- 							<div class="form-group"> -->
+<!-- 								<button type="submit" id="submit_doc" class="btn btn-primary" disabled="{{disableButtons}}">Submit</button> -->
+<!-- 									<button type="submit" id="submit_cyoa" class="btn btn-primary" disabled="{{disableButtons}}">Create a CYOA</button> -->
+<!-- 							</div> -->
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary js-btn" disabled="{{disableButtons}}">Submit</button>
+									<button type="button" class="btn btn-primary js-btn-select-existing-page" disabled="{{disableButtons}}">Select an existing page</button>
+								</div>
+						{{/basicFormBlock}}
+					
+				<!--	
+							{{#autoForm id="insertPageForm" collection="Pages"  meteormethod="addPage" type="method"}}
+								{{> afQuickField name="title"}}
+								{{> afQuickField name="cyoaid" value=cyoa_id}}
+								{{> afQuickField name="parent.$.parentid" value=parent_id}}-->
+					<!--			<div class="form-group">
+									<button type="submit" class="btn btn-primary js-btn" disabled="{{disableButtons}}">Submit</button>
+									<button type="button" class="btn btn-primary js-btn-select-existing-page" disabled="{{disableButtons}}">Select an existing page</button>
+								</div>-->
+<!-- 							{{/autoForm}} -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+<template name="conditionList">
+<!-- 		{{bodyid}} -->
+    {{#let body_id=this._id}}<br>
+<!-- 		{{bodyid}} -->
+<!-- 		{{body_id}} -->
+		{{#if currentUser}}
+			<button class="glyphicon glyphicon-plus js-add-condition">
+			</button>
+		{{/if}}
+		{{#each condition}}
+	<!-- 		<span class="js-page-choises css-page-choises {{readyORnot}}">{{title}}</span> -->
+<!-- 			{{body_id}} -->
+<!-- {{this}} -->
+			<br />
+<!-- 			<a href="#" class="js-condition-paramIndex">{{paramIndex}}</a> -->
+<!--			<a href="#" class="js-condition-operation">{{operation}}</a> -->
+<!-- 			<a href="#" class="js-condition-operator">{{operator}}</a> -->
+			<select class="js-condition-operation" data-body-id="{{body_id}}" data-condition-index="{{@index}}">
+				{{#if isFirst @index}}
+					<option value="None" {{select optionValue=operation option="None"}}>-</option>
+				{{else}}
+					<option value="AND" {{select optionValue=operation option="AND"}}>AND</option>
+					<option value="OR" {{select optionValue=operation option="OR"}}>OR</option>
+				{{/if}}
+			</select>
+			<a href="#" class="js-condition-param" data-condition-index="{{@index}}" data-bodyid="{{body_id}}">{{paramName}}</a>
+			<select class="js-condition-operator" data-body-id="{{body_id}}" data-condition-index="{{@index}}">
+				<option value="equal" {{select optionValue=operator option="equal"}}>equal</option>
+				<option value="unequal" {{select optionValue=operator option="unequal"}}>unequal</option>
+				<option value="larger" {{select optionValue=operator option="larger"}}>larger</option>
+				<option value="smaller" {{select optionValue=operator option="smaller"}}>smaller</option>
+			</select>
+			<span>{{paramValue}}</span>,
+			{{#if currentUser}}
+				<button class="glyphicon glyphicon-minus js-remove-condition" data-body-id="{{body_id}}" data-condition-index="{{@index}}">
+				</button>
+			{{/if}}
+		{{/each}}
+    {{/let}}
+</template>

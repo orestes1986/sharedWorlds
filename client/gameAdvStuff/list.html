@@ -1,0 +1,22 @@
+<template name="gameAdvList">
+<!-- 	<div class="container top-margin"> -->
+<!-- 		<div class="row"> -->
+	<a href="#" class="js-add-gameAdv">New game</a>
+	{{#each games}}
+<!-- 		<div class="col-md-3 col-xs-6"> -->
+<!-- 			<div class="light-border"> -->
+		<div>
+			<a href="/games/{{_id}}" class="css-link-cyoa css-link">Play</a>
+			{{>deleteGameAdv}}
+	<!-- 			</div> -->
+	<!-- 		</div> -->
+		</div>
+	{{/each}}
+<!-- 		</div> -->
+<!-- 	</div> -->
+</template>
+<template name="deleteGameAdv">
+	<a href="#" class="js-remove-gameAdv">
+		<span class="glyphicon glyphicon-remove css-remove" aria-hidden="true"></span>
+	</a> 
+</template>

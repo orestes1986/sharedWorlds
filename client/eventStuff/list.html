@@ -1,0 +1,35 @@
+<!--<template name="event_add_form">
+	<div class="modal fade" id="event_add_form">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group">							
+							{{#autoForm id="insertEventForm" collection="Events"  meteormethod="addEvent" type="method"}}
+								{{> afQuickField name="title"}}
+								{{> afQuickField name="start" value=adv_time}}
+								{{> afQuickField name="end" value=adv_time}}
+								{{> afQuickField name="content"}}
+								{{> afQuickField name="tags"}}
+								{{> afQuickField name="worldid" value=world_id}}
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary js-btn" disabled="{{disableButtons}}">Submit</button>
+								</div>
+							{{/autoForm}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>-->
+<template name="eventList">
+	<script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
+	<link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet" type="text/css"/>
+	<div id="eventList">
+		<div id="visualization">
+<!-- 			{{>event_add_form}} -->
+		</div>
+		<div id="event_display">
+		{{>eventItem}}
+		</div>
+	</div>
+</template>

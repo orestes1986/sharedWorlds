@@ -1,0 +1,37 @@
+.css-body {
+	background-color:#fff;
+/* 	min-width: 550px; */
+	margin:2px;
+}
+.css-body-area {
+	min-width:50px;
+	min-height:20px;
+	border:1px solid #000;
+}
+.css-remove-body {
+	float:right;
+}
+.css-body-choice, .css-body-choice:hover, .css-page-choises, .css-page-choises:hover {
+	text-decoration: none;
+/* 	font-style: oblique; */
+	color: #fff;
+}
+.css-page-choises .wide-text-edit {
+	color:#000;
+}
+.css-pages-body-is-paired {
+	background-color: #800;
+}
+.css-remove-choice {
+	right:5%;
+	float:right;
+}
+.css-body-time {
+	text-align:right;
+	float:right;
+}
+.css-editable-time {
+	position: relative;
+	width: 40px;
+	height: 30px;
+}
