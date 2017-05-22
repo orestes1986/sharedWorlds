@@ -1,15 +1,5 @@
 // code that is only sent to the client
 
-
-/*
-
-~/[path to apps folder]/ $ meteor login
-~/[path to apps folder]/ $ meteor whoami
-
-DEPLOY_HOSTNAME=eu-west-1.galaxy.meteor.com meteor deploy sharedworlds.eu.meteorapp.com --settings ./node_modules/settings.json
-
-*/
-
 ////////////////
 Meteor.subscribe("userData");
 Meteor.subscribe("tags");
