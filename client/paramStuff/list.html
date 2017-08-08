@@ -4,6 +4,10 @@
 <!-- 		<span class="js-page-choises css-page-choises {{readyORnot}}">{{title}}</span> -->
 			<a href="#" class="js-paramItem">{{title}}, </a>
 		{{/each}}
+		{{#each numparam}}
+<!-- 		<span class="js-page-choises css-page-choises {{readyORnot}}">{{title}}</span> -->
+			<a href="#" class="js-paramItem">{{title}}, </a>
+		{{/each}}
 		{{>addParam}}
 	</div>
 	{{>param_add_form}}
@@ -28,6 +32,8 @@
 				<div class="modal-body">
 					<div class="form-group">
 							{{#basicFormBlock schema=schema action=action}}
+                                <input type="checkbox"  name="typeOfParam" unchecked> Numerical
+<!-- 								<p> {{> basicCheckBox field="typeOfParam"}} </p> -->
 								<p> {{> basicInput field="title"}} </p>
 								<div class="form-group">
 									<button type="submit" id="submit_doc" class="btn btn-primary" disabled="{{disableButtons}}">Submit</button>
@@ -39,4 +45,9 @@
 			</div>
 		</div>
 	</div>
+</template>
+<template name="basicCheckBox">
+	<strong>{{label}}fas</strong>
+	<br>
+	<input type="checkbox" class="reactive-element" name="typeOfParam">
 </template>

@@ -10,12 +10,17 @@ Template.param_add_form.helpers({
 		label:"Title (*)",
         instructions: "Enter a title!"
       },
+      typeOfParam: {
+        type: Boolean,
+		label:"Numerical",
+        instructions: "Check if this parameters are going to be about numerical values!"
+      },
     });
   },
   action: function () {
     return function (els, callbacks, changed) {
 // 		console.log("cyoa_add_form Action running!");
-// 		console.log("cyoa_add_form Form data!", this);
+		console.log("cyoa_add_form Form data!", this);
 // 		console.log("Cyoa title!", this.title);
 // 		if (this.url) {
 // 			console.log("Cyoa URL!", this.url);
@@ -36,13 +41,24 @@ Template.param_add_form.helpers({
 		this.cyoaid = Session.get("cyoaid");
 		this.pageid = Session.get("pageid");
 		this.owner = Meteor.user()._id;
+		if (document.getElementsByName("typeOfParam")[0].checked) {
+			console.log("'tis Numerical!!!");
+			var id = Meteor.call("addNumParam", this, function(err, res){
+				if (!err){// all good
+// 					console.log("event callback received id: "+res);
+					Session.set("cyoaid", res);
+				}
+			});
+		} else {
 			var id = Meteor.call("addParam", this, function(err, res){
 				if (!err){// all good
 // 					console.log("event callback received id: "+res);
 					Session.set("cyoaid", res);
 				}
 			});
+		}
 // 		}
+		console.log("cyoa_add_form Form data!!!!!!", this);
 		callbacks.success(); // Display success message.
 		callbacks.reset();   // Run each Element's custom `reset` function to clear the form.
 		$("#cyoa_add_form").modal('hide');
@@ -62,6 +78,9 @@ Template.paramlist.helpers({
 	// find all visible params
 	param:function(){
 		return CyoaParams.find({cyoaid:Session.get("cyoaid")});
+	},
+	numparam:function(){
+		return NumParams.find({cyoaid:Session.get("cyoaid")});
 	},
 });
 

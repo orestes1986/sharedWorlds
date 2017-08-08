@@ -181,6 +181,14 @@ Meteor.publish("cyoaParams", function(){
 		] 
 	});
 });
+Meteor.publish("numParams", function(){
+	return NumParams.find({
+	 $or:[
+		{isPrivate:{$ne:true}}, 
+		{owner:this.userId}
+		] 
+	});
+});
 //////////////////////////////////
 // all visible pages of adventures 
 Meteor.publish("pages", function(){

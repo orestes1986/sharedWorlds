@@ -22,6 +22,7 @@ Meteor.subscribe("cyoas");
 // Meteor.subscribe("cyoaEditingUsers");
 // Meteor.subscribe("cyoaComments");
 Meteor.subscribe("cyoaParams");
+Meteor.subscribe("numParams");
 Meteor.subscribe("pages");
 Meteor.subscribe("pagesBodies");
 ////////////////
