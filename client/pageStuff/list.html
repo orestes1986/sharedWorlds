@@ -1,8 +1,37 @@
-<template name="allPageList">
+<!-- <template name="allPageList"> -->
 <!-- 		{{parentid}} -->
 <!-- 				{{> cyoaMeta}} -->
-    {{#each allPages}}
+<!--     {{#each allPages}} -->
 <!-- 		<span class="js-page-choises css-page-choises {{readyORnot}}">{{title}}</span> -->
-		<a href="/cyoas/{{cyoaid}}/page/{{_id}}" class="css-page-choises js-page-choises {{readyORnot}}">{{title}}</a>
-    {{/each}}
+<!-- 		<a href="/cyoas/{{cyoaid}}/page/{{_id}}" class="css-page-choises js-page-choises {{readyORnot}}">{{title}}</a> -->
+<!--     {{/each}} -->
+<!-- </template> -->
+<template name="allPageList">
+<!-- 	<script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script> -->
+<!-- 	<link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet" type="text/css"/> -->
+	<div id="allPageList">
+		<div id="visualization">
+		</div>
+	<!--	<div id="event_display">
+		{{>treeItem}}
+		</div>-->
+	</div>
 </template>
+<!--
+<template name="treeItem">
+		<span class="js-page-choises css-page-choises {{readyORnot}}">{{title}}</span>
+		<a href="/cyoas/{{cyoaid}}/page/{{_id}}" class="css-page-choises js-page-choises {{readyORnot}}">{{title}}</a>
+</template>
+<template name="deleteLeaf">
+	<a href="#" class="js-remove-page">
+		<span class="glyphicon glyphicon-remove css-remove" aria-hidden="true"></span>
+	</a> 
+</template>
+<template name="addLeaf">
+	{{#let body_id=bodyid}}
+		{{#if currentUser}}
+			<button class="glyphicon glyphicon-plus js-show-page-form" data-body-id="{{body_id}}" aria-hidden="true" title="Add Page">
+			</button>
+		{{/if}}
+	{{/let}}
+</template>-->
