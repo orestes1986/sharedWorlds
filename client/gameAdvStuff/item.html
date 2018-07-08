@@ -68,6 +68,7 @@
 					<div class="css-game-body">
 						{{{get_texts}}}
 					</div>
+					{{>interuptionBody}}
 					<div class="css-game-choices">
 						{{#each choices}}
 							<a href="#" class="css-page-choises js-next-page">
@@ -75,7 +76,6 @@
 							</a>
 						{{/each}}
 					</div>
-					{{>interuptionBody}}
 				</div>
 			{{/let}}
 		{{/with}}
@@ -83,18 +83,22 @@
 </template>
 <template name="interuptionBody">
 	{{#each interruption}}
-		{{#let interuptbodyid=this._id}}
-			<div class="css-game-interrupt-body">
-				{{{get_texts}}}
+		{{#if not_first_page}}
+			<div class="css-game-interruption">
+				{{#let interuptbodyid=this._id}}
+					<div class="css-game-interrupt-body">
+						{{{get_texts}}}
+					</div>
+					<div class="css-game-interrupt-choices">
+						{{#each interuptChoices}}
+							<a href="#" class="css-page-interrupt-choises js-next-page">
+								<a href="#" class="css-body-interrupt-choice">{{get_choice_value interuptbodyid}}</a>
+							</a>
+						{{/each}}
+					</div>
+				{{/let}}
 			</div>
-			<div class="css-game-interrupt-choices">
-				{{#each interuptChoices}}
-					<a href="#" class="css-page-interrupt-choises js-next-page">
-						<a href="#" class="css-body-interrupt-choice">{{get_choice_value interuptbodyid}}</a>
-					</a>
-				{{/each}}
-			</div>
-		{{/let}}
+		{{/if}}
 	{{/each}}
 </template>
 <template name="gameAdvMeta">

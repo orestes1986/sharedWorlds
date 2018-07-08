@@ -284,6 +284,21 @@ Template.interuptionBody.helpers({
 		});
 		return Session.get('interruptions');
 	},
+	not_first_page:function(){
+// 		console.log("not_first_page 00");
+// 		console.log(this);
+		var page = Pages.findOne({_id:this.pageid});
+// 		console.log(page);
+		for (var j = 0; j < page.parent.length; j++) {
+// 			console.log(page.parent[j]);
+			if(page.parent[j].choiceValue == "First Page"){
+//				console.log("Found the first page" + i);
+				return false;
+//				console.log("Removed the first page" + i);
+			}
+		}
+		return true;
+	},
 	get_texts:function(){
 // 		console.log("Entered interruption get_texts");
 // 		console.log(this);
@@ -303,8 +318,8 @@ Template.interuptionBody.helpers({
 		}
 	},
 	interuptChoices: function() {
-		console.log("gamePageItem choices");
-		console.log(this);
+// 		console.log("gamePageItem choices");
+// 		console.log(this);
 		var choicesToReturn = [];
 		var pages = Pages.find( {cyoaid:Session.get("cyoaid"), "parent": { $elemMatch: { "parentid": this._id } } } ).fetch();
 // 			console.log("pages");
@@ -331,7 +346,7 @@ Template.interuptionBody.helpers({
 								notReadyFlag = true;
 								break;
 							} else {
-								console.log("css-page-choise-ready");
+// 								console.log("css-page-choise-ready");
 // 								console.log(pages[p]);
 								choicesToReturn.push(pages[p]);
 								break;
@@ -359,8 +374,8 @@ Template.interuptionBody.helpers({
 // 			console.log(this.param);
 // 			return this.param;
 // 		}
-		console.log("choicesToReturn");
-		console.log(choicesToReturn);
+// 		console.log("choicesToReturn");
+// 		console.log(choicesToReturn);
 		return choicesToReturn;
 	},
 });

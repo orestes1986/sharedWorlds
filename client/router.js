@@ -23,7 +23,7 @@ Router.route('/worlds/:_id', function () {
 Router.route('/demo', function () {
 // 	console.log("you hit / ");
 	this.render("navbar-plain", {to:"header"});
-	this.render("demotemplate", {to:"main"});	
+	this.render("demotemplate", {to:"main"});
 });
 
 // 'HOME' page
@@ -146,6 +146,7 @@ Router.route('/cyoas/:cyoaid/page/:pageid', function () {
 Router.route('/cyoas/:cyoaid/list', function () {
 // 	console.log("you hit /adventures	"+this.params._id);
 	Session.set("gameid", "none");
+	Session.set("cyoaid", this.params.cyoaid);
 	this.render("navbar-plain", {to:"header"});
 	this.render("allPageList", {to:"main"});	
 });

@@ -1,23 +1,46 @@
+.css-body-player-time {
+	text-align: right;
+	float: right;
+	color: #fff;
+}
 .css-game-body-n-choices {
 	position: relative;
 /* 	padding-top: 1px; */
 }
 .css-game-choices {
-	position: absolute;
-	width: 90%;
+	position: relative;
+/* 	width: 90%; */
+/* 	height:100%; */
 	margin-left: 5%;
 	margin-right: 5%;
-	bottom: 10px;
+	margin-top: 5%;
+/* 	background-color: rgba(0,255,255,.3); */
+/* 	margin-top:150px; */
+/* 	z-index:1; */
 }
 .css-game-body {
 	position: relative;
 	margin-top: 10px;
+/* 	margin: 10%; */
+}
+.css-game-interruption {
+	position: relative;
+	background-color: rgba(255, 0, 125, .5);
+/* 	height:100%; */
+/* 	z-index:0; */
+}
+.css-game-interrupt-body {
+	position: relative;
+	margin-top: 10px;
 	margin: 10%;
 }
-.css-body-player-time {
-	text-align: right;
-	float: right;
-	color: #fff;
+.css-game-interrupt-choices {
+	position: relative;
+	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
+	bottom: 10px;
+	margin-bottom: 30px;
 }
 .css-page-interrupt-choises {
 	display: inline-block;
@@ -31,19 +54,6 @@
 	text-align: center;
 	vertical-align:middle;
 	border-radius: 10%;
-}
-.css-game-interrupt-choices {
-	position: relative;
-	width: 90%;
-	margin-left: 5%;
-	margin-right: 5%;
-	bottom: 10px;
-	
-}
-.css-game-interrupt-body {
-	position: relative;
-	margin-top: 10px;
-	margin: 10%;
 }
 .css-body-interrupt-choice, .css-body-interrupt-choice:hover, .css-page-interrupt-choises, .css-page-interrupt-choises:hover {
 	text-decoration: none;

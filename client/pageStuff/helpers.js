@@ -2,6 +2,16 @@
 /// page	HELPERS
 ////////
 
+Template.allPageList.rendered = function() {
+	console.log("allPageList.rendered");
+	Meteor.cyoaFunctions.network();
+};
+Template.allPageList.helpers({
+	network:function() {
+		console.log("allPageList.helpers");
+		Meteor.cyoaFunctions.network();
+	},
+});
 Template.deletepage.helpers({
 	onlyPage:function(){
 // 		for (var j = 0; j < this_bodies.length; j++) {

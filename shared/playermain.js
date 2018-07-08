@@ -200,32 +200,32 @@ Meteor.methods({
 // 		}
 // 	},*/
 	removePlayer: function(paramid, dataIndex, valueIndex){
-		console.log("Entered  removeParamFieldValue");
+// 		console.log("Entered  removeParamFieldValue");
 		var realParam = CyoaParams.findOne({_id:paramid});
-		console.log(realParam);
+// 		console.log(realParam);
 		if (realParam){
 			console.log("it is realParam");
 			if (realParam.owner == this.userId) {
-				console.log("it is Empty");
+// 				console.log("it is Empty");
 				var unsetObj = {};
 				unsetObj['data.' + dataIndex + '.values.'+valueIndex ] = '1';
-				console.log(unsetObj);
+// 				console.log(unsetObj);
 				CyoaParams.update({_id:realParam._id}, {$unset:unsetObj}, {multi:true});
 				
 				var pullObj = {};
 				pullObj['data.' + dataIndex + '.values' ] = null;
-				console.log(pullObj);
+// 				console.log(pullObj);
 				CyoaParams.update({_id:realParam._id}, {$pull:pullObj}, {multi:true});
 			}
 		}
 	},
 	getTheRightBody: function(pageid, playerid){
-		console.log("Getting the right body");
+// 		console.log("Getting the right body");
 		var realPage = Pages.findOne({_id:pageid});
 		if (realPage) {
 			var bodies = PagesBodies.find({pageid:pageid}).fetch();
-			console.log(bodies);
-			console.log(bodies[0].conditions);
+// 			console.log(bodies);
+// 			console.log(bodies[0].conditions);
 			var realPlayer = Players.findOne({_id:playerid});
 			if (bodies.length > 0) {
 				if ((bodies.length == 1) && (!bodies[0].conditions)) {
@@ -385,16 +385,12 @@ Meteor.methods({
 	// 		console.log(player.time);
 			var interruptions = [];
 			var pages = Pages.find( {cyoaid:cyoaid, "parent": { $elemMatch: { "parentid": "Constant", "choiceValue":"public" } } } ).fetch();
-	// 		console.log(pages);
-	// 		console.log(parseInt(player.time));
-	// 		console.log(parseInt(currentBody.time));
 			var bodyTime = parseInt(currentBody.time);
 			var playerTime = parseInt(player.time);
 			for (var p = 0; p < pages.length; p++) {
 // 				var pageBodies = PagesBodies.find({pageid:pages[p]._id}).fetch();
-				
 				var bodyid = Meteor.call("getTheRightBody", pages[p]._id, player._id);
-				console.log(bodyid);
+// 				console.log(bodyid);
 				var pageBodies = PagesBodies.findOne({_id:bodyid});
 // 				for (var pb = 0; pb < pageBodies.length; pb++) {
 	// 				console.log(parseInt(pageBodies[pb].time));

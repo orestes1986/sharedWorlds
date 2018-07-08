@@ -22,3 +22,15 @@
 	font-style: oblique;
 	color: #921;
 }
+#treeVisualization {
+/*     position:absolute; */
+	position: fixed;
+	margin-top: 100px;
+	top: 0px;
+	left: 0px;
+	bottom: 100%;
+	width: 100%;
+	height: 100%;
+	z-index:-1;
+/* 	background-color: #000; */
+}
