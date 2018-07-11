@@ -32,7 +32,6 @@ spacebars
 stylus@=2.513.14
 twbs:bootstrap
 yogiben:autoform-tags
-jorisbontje:vis
 templates:forms
 ian:accounts-ui-bootstrap-3
 mizzao:autocomplete
