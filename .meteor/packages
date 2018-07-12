@@ -29,7 +29,6 @@ random@1.1.0
 reload@1.2.0
 session@1.1.7
 spacebars
-stylus@=2.513.14
 twbs:bootstrap
 yogiben:autoform-tags
 templates:forms

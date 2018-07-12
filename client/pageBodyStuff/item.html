@@ -9,38 +9,41 @@
 				<!--       <div class="css-description-area editable-text-trigger">Pages content: {{> editableText options=optionsHelper}}</div> -->
 					<span class="css-body js-pages-body col-xs-12 col-sm-12 col-md-12 col-lg-12" data-this-id="{{this._id}}">
 							<div>
-								<span>Conditions: {{> conditionList}}</span><span class="css-body-time">Time:
-								{{#with get_time activebodyid}}
-<!-- 									{{overall}}  -->
-									{{wholeDate}}
-									{{#if this.centuries}}
-										<input type="number" class="js-editable-time css-editable-time" id="time-centuries" value="{{this.centuries}}"> Centuries,
-									{{/if}}
-									{{#if this.decades}}
-										<input type="number" class="js-editable-time css-editable-time" id="time-decades" value="{{this.decades}}"> Decades,
-									{{/if}}
-									{{#if this.years}}
-										<input type="number" class="js-editable-time css-editable-time" id="time-years" value="{{this.years}}"> Years,
-									{{/if}}
-									{{#if this.months}}
-										<input type="number" class="js-editable-time css-editable-time" id="time-months" value="{{this.months}}"> Months,
-									{{/if}}
-									{{#if this.weeks}}
-										<input type="number" class="js-editable-time css-editable-time" id="time-weeks" value="{{this.weeks}}"> Weeks,
-									{{/if}}
-									{{#if this.days}}
-										<input type="number" class="js-editable-time css-editable-time" id="time-days" value="{{this.days}}"> Days,
-									{{/if}}
-									{{#if this.hours}}
-										<input type="number" class="js-editable-time css-editable-time" id="time-hours" value="{{this.hours}}"> Hours, 
-									{{/if}}
-									{{#if this.minutes}}
-										<input type="number" class="js-editable-time css-editable-time" id="time-minutes" value="{{this.minutes}}"> Minutes,
-									{{/if}}
-									{{#if this.seconds}}
-										<input type="number" class="js-editable-time css-editable-time" id="time-seconds" value="{{this.seconds}}"> Seconds,
-									{{/if}}
-								{{/with}}</span>
+								<span class="css-body-time">Time:
+									{{#with get_time activebodyid}}
+	<!-- 									{{overall}}  -->
+										{{wholeDate}}
+										{{#if this.centuries}}
+											<input type="number" class="js-editable-time css-editable-time" id="time-centuries" value="{{this.centuries}}"> Centuries,
+										{{/if}}
+										{{#if this.decades}}
+											<input type="number" class="js-editable-time css-editable-time" id="time-decades" value="{{this.decades}}"> Decades,
+										{{/if}}
+										{{#if this.years}}
+											<input type="number" class="js-editable-time css-editable-time" id="time-years" value="{{this.years}}"> Years,
+										{{/if}}
+										{{#if this.months}}
+											<input type="number" class="js-editable-time css-editable-time" id="time-months" value="{{this.months}}"> Months,
+										{{/if}}
+										{{#if this.weeks}}
+											<input type="number" class="js-editable-time css-editable-time" id="time-weeks" value="{{this.weeks}}"> Weeks,
+										{{/if}}
+										{{#if this.days}}
+											<input type="number" class="js-editable-time css-editable-time" id="time-days" value="{{this.days}}"> Days,
+										{{/if}}
+										{{#if this.hours}}
+											<input type="number" class="js-editable-time css-editable-time" id="time-hours" value="{{this.hours}}"> Hours, 
+										{{/if}}
+										{{#if this.minutes}}
+											<input type="number" class="js-editable-time css-editable-time" id="time-minutes" value="{{this.minutes}}"> Minutes,
+										{{/if}}
+										{{#if this.seconds}}
+											<input type="number" class="js-editable-time css-editable-time" id="time-seconds" value="{{this.seconds}}"> Seconds,
+										{{/if}}
+									{{/with}}
+								</span>
+								<span>Conditions: {{> conditionList}}</span>
+
 							</div>
 <!-- 							<div class="css-description-area editable-text-trigger"><h4>{{> editableText collection="pagesBodies" field="title"}}</h4></div> -->
 							{{#each texts}}
