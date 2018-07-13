@@ -1,4 +1,8 @@
 // code that is only sent to the server. 
+var port = process.env.PORT || 3000
+server.listen(port, function() {
+    console.log("App is running on port " + port);
+});
 
 Meteor.startup(function () {
 //	 create a starter doc if necessary
