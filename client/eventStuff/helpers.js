@@ -3,6 +3,7 @@
 ////////
 
 Template.eventList.rendered = function() {
+// 	$.getScript("/scripts/vis.js");
 	Meteor.eventFunctions.timeline();
 };
 Template.eventList.helpers({
