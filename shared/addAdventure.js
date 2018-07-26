@@ -47,7 +47,7 @@ Meteor.methods({
 		title = "First Page";
 // 		console.log("Adding " + title + " page");
 		parentids = [];
-		parentids.push({parentid: "none", choiceValue:title});
+-		parentids.push({parentid: "none", choiceValue:title}/*, {parentid: "Constant", choiceValue:"public"}*/);
 		addingPage = ({title: title, parent:parentids, cyoaid:cyoaid, owner:userid});
 		pageid = Pages.insert(addingPage);
 // 		console.log(pageid);
