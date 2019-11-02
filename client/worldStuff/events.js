@@ -18,7 +18,7 @@ Template.world_add_form.events({
 					console.log("event callback received id: "+res);
 					Session.set("worldid", res);
 				}
-			});
+			}); // calling: ~/sharedworlds/shared/worldmain.js - addWorld/~ //
 		}
 		$("#world_add_form").modal('hide');
 		return false;
@@ -80,7 +80,7 @@ Template.addWorld.events({
 //					 console.log("event callback received id: "+res);
 //					 Session.set("worldid", res);						
 //				 }
-//			 });
+//			 }); // calling: ~/sharedworlds/shared/worldmain.js - addWorld/~ //
 //		 }
 //	 },
 // //	 // load world button
@@ -97,7 +97,7 @@ Template.worldMeta.events({
 		} else {
 			console.log(event.target.checked);
 			var world = {_id:Session.get("worldid"), isPrivate:event.target.checked};
-			Meteor.call("updateAdvPrivacy", world);
+			Meteor.call("updateAdvPrivacy", world); // calling: ~/sharedworlds/shared/?????????.js - ?????????/~ //
 		}
 	},
 	// remove world button
@@ -107,7 +107,7 @@ Template.worldMeta.events({
 		} else {
 			// they are logged in... lets insert a world
 			var world = {_id:Session.get("worldid")};
-			Meteor.call("removeWorld", world);
+			Meteor.call("removeWorld", world); // calling: ~/sharedworlds/shared/worldmain.js - removeWorld/~ //
 		}
 	},
 	// edit world button
@@ -120,7 +120,7 @@ Template.worldMeta.events({
 			console.log(event.element);
 			console.log(this);
 // 			var world = {_id:Session.get("worldid")};
-// 			Meteor.call("removeWorld", world);
+// 			Meteor.call("removeWorld", world); // calling: ~/sharedworlds/shared/worldmain.js - removeWorld/~ //
 		}
 	}, 
 	// edit world button
@@ -133,7 +133,7 @@ Template.worldMeta.events({
 // 			console.log(event.element);
 			console.log(this);
 // 			var world = {_id:Session.get("worldid")};
-// 			Meteor.call("removeWorld", world);
+// 			Meteor.call("removeWorld", world); // calling: ~/sharedworlds/shared/worldmain.js - removeWorld/~ //
 		}
 	}, 
 })

@@ -83,6 +83,12 @@ Template.condition_select_form.events({
 		Session.set("paramid", this._id);
 		$("#condition_select_value").modal('show');
 	},
+	"click .js-numparam-to-choose":function(event){
+// 		console.log("js-param-to-choose clicked");
+		$("#condition_select_form").modal('hide');
+		Session.set("numParamid", this._id);
+		$("#condition_select_numvalue").modal('show');
+	},
 });
 Template.condition_select_value.events({
 	"click .js-set-condition-value":function(event){
@@ -198,8 +204,11 @@ Template.bodyEditor.events({
 			}
 		}
 	},
+	//
+	// param pairing
+	//
 	'click .js-pages-body-clickable':function(event){
-// 		console.log("body was clicked...");
+		console.log("body was clicked (for existing param)...");
 		if ($(event.currentTarget).hasClass( "js-pages-body-is-paired" )) {
 			$('.js-pages-body').removeClass('js-pages-body-clickable');
 			$('.js-pages-body').removeClass('js-pages-body-is-paired');
@@ -223,7 +232,7 @@ Template.bodyEditor.events({
 		$('.js-pages-body').removeClass('css-pages-body-is-paired');
 	},
 	'click .js-pages-body-addValue-clickable':function(event){
-// 		console.log("body addValue was clicked...");
+		console.log("body addValue was clicked (for new param)...");
 // 		console.log(this._id);
 // 		console.log(event);
 		if ($(event.currentTarget).hasClass( "js-pages-body-is-paired" )) {
@@ -255,6 +264,69 @@ Template.bodyEditor.events({
 		});
 		$('.js-pages-body').removeClass('js-pages-body-addValue-clickable');
 		$('.js-pages-body').removeClass('js-pages-body-is-paired');
+		$('.js-pages-body').removeClass('css-pages-body-is-paired');
+	},
+	//
+	// numParam pairing
+	//
+	'click .js-pages-num-body-clickable':function(event){
+		console.log("body was clicked (for existing numParam)...");
+		if ($(event.currentTarget).hasClass( "js-pages-num-body-is-paired" )) {
+			$('.js-pages-body').removeClass('js-pages-num-body-clickable');
+			$('.js-pages-body').removeClass('js-pages-num-body-is-paired');
+			$('.js-pages-body').removeClass('css-pages-body-is-paired');
+			return false;
+		}
+// 		console.log(this._id);
+		console.log(event.currentTarget);
+		var numParam = NumParams.findOne({_id:$(event.currentTarget).attr("data-numParam-id")});
+		console.log(numParam);
+		console.log($(event.currentTarget));
+		numParam.point_pool[$(event.currentTarget).attr("data-pp-index")].bodyid = this._id;
+// 		console.log(numParam);
+		var value = { value: numParam.point_pool[$(event.currentTarget).attr("data-pp-index")].value, pageid: numParam.point_pool[$(event.currentTarget).attr("data-pp-index")].pageid, bodyid: this._id}
+// 		console.log($(event.currentTarget).attr("data-pp-index"));
+// 		console.log($(event.currentTarget).attr("data-value-index"));
+// 		console.log($(event.currentTarget).attr("data-numParam-id"));
+// 		Meteor.call("updateParam", numParam);
+		Meteor.call("updateNumParamPoolPointBodyId", numParam._id, $(event.currentTarget).attr("data-pp-index"), value);
+		$('.js-pages-body').removeClass('js-pages-num-body-clickable');
+		$('.js-pages-body').removeClass('js-pages-num-body-is-paired');
+		$('.js-pages-body').removeClass('css-pages-body-is-paired');
+	},
+	'click .js-pages-num-body-addValue-clickable':function(event){
+		console.log("num-body addValue was clicked (for new numParam)...");
+// 		console.log(this._id);
+// 		console.log(event);
+		if ($(event.currentTarget).hasClass( "js-pages-num-body-is-paired" )) {
+			$('.js-pages-body').removeClass('js-pages-num-body-addValue-clickable');
+			$('.js-pages-body').removeClass('js-pages-num-body-is-paired');
+			$('.js-pages-body').removeClass('css-pages-body-is-paired');
+			return false;
+		}
+		var numParam = NumParams.findOne({_id:Session.get("numParamid")});
+		var ppindex = $(event.currentTarget).attr("data-pp-index");
+		var value = { value: "0", pageid: Session.get("pageid"), bodyid:this._id };
+		Meteor.call("addNumParamPoolPoint", numParam._id, /*ppindex,*/ value, function(error, result){
+			if (result == 1) {
+				var msg = "Value added!";
+// 				console.log(msg);
+				FlashMessages.sendSuccess(msg);
+			} else if (result == 2) {
+				var msg = "Please attach to a body this value or another one not currently attached to a body, otherwise this page might not behave as expected!";
+				FlashMessages.sendError(msg);
+			} else if (result == 3) {
+				var msg = "Not a valid param";
+// 				console.log(msg);
+				FlashMessages.sendWarning(msg);
+			} else if (result == 0) {
+				var msg = "You are not the owner";
+// 				console.log(msg);
+				FlashMessages.sendWarning(msg);
+			}
+		});
+		$('.js-pages-body').removeClass('js-pages-num-body-addValue-clickable');
+		$('.js-pages-body').removeClass('js-pages-num-body-is-paired');
 		$('.js-pages-body').removeClass('css-pages-body-is-paired');
 	},
 });

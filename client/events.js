@@ -10,7 +10,7 @@ Template.navbar.events({
 		for (var i=0;i<10;i++){
 			Meteor.call('testMethod', function(){
 				console.log('testMethod returned');
-			});
+			}); // calling: ~/sharedworlds/shared/?????????.js - ?????????/~ //
 			console.log('after testMethod call');
 		}
 		if (!Meteor.user()){// user not available
@@ -23,7 +23,7 @@ Template.navbar.events({
 					console.log("event callback received id: "+res);
 					Session.set("docid", res);						
 				}
-			});
+			}); // calling: ~/sharedworlds/shared/?????????.js - ?????????/~ //
 		}
 	}//,
 //	 // load doc button

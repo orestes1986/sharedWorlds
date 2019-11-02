@@ -1,17 +1,19 @@
 <template name="paramlist">
 	<div>
-		{{#each param}}
+		<h3>Parameters:
+		{{>addParam}} </h3>
+		Regular: {{#each param}}
 <!-- 		<span class="js-page-choises css-page-choises {{readyORnot}}">{{title}}</span> -->
 			<a href="#" class="js-paramItem">{{title}}, </a>
-		{{/each}}
-		{{#each numparam}}
+		{{/each}} <br />
+		Numerical: {{#each numparam}}
 <!-- 		<span class="js-page-choises css-page-choises {{readyORnot}}">{{title}}</span> -->
-			<a href="#" class="js-paramItem">{{title}}, </a>
+			<a href="#" class="js-numParamItem">{{title}}, </a>
 		{{/each}}
-		{{>addParam}}
 	</div>
 	{{>param_add_form}}
 	{{>param_edit_form}}
+	{{>numParam_edit_form}}
 </template>
 <template name="addParam">
 {{#if currentUser}}

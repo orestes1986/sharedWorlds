@@ -26,7 +26,7 @@ Meteor.methods({
 				console.log(addingBody);
 				var bodyid = PagesBodies.insert(addingBody);
 				console.log(bodyid);
-				Meteor.call("updateCyoa", page.cyoaid);
+				Meteor.call("updateCyoa", page.cyoaid); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 // 				if (Meteor.isClient) {
 // 					$("#param_add_form").modal('hide');
 // 				}
@@ -71,7 +71,7 @@ Meteor.methods({
 							for (var datas = 0; datas < realParam[params].data.length; datas++) {
 								for (var value = 0; value < realParam[params].data[datas].values.length; value++) {
 									if (realParam[params].data[datas].values[value].bodyid == realPageBody._id) {
-										Meteor.call("removeParamFieldValue", realParam[params]._id, datas, value);
+										Meteor.call("removeParamFieldValue", realParam[params]._id, datas, value); // calling: ~/sharedworlds/shared/paramvaluemain.js - removeParamFieldValue/~ //
 										repeatFlag = true;
 										console.log("true");
 										break;
@@ -119,7 +119,7 @@ Meteor.methods({
 					condition.operation = "None";
 					PagesBodies.update({_id:pageBodyid}, { $set:{ conditions: [condition] }});
 				}
-				Meteor.call("updateCyoa", cyoa);
+				Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 			}
 		}
 		
@@ -139,7 +139,7 @@ Meteor.methods({
 				var setModifier = { $set: {} };
 				setModifier.$set['conditions.' + condition.index] = { operation: condition.operation, paramid: condition.paramid, paramIndex:  condition.paramIndex, operator: condition.operator, paramValueIndex: condition.paramValueIndex };
 				PagesBodies.update({_id:pageBodyid}, setModifier);
-				Meteor.call("updateCyoa", cyoa);
+				Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 			}
 		}
 	},
@@ -160,8 +160,9 @@ Meteor.methods({
 					realPageBody.conditions[0].operation = "None";
 				}
 	// 			PagesBodies.remove({_id:pageBodyid});
-				Meteor.call("updatePageBody", realPageBody);
-	// 			Meteor.call("updateCyoa", cyoa);
+				Meteor.call("updatePageBody", realPageBody); // calling: ~/sharedworlds/shared/pagebodiesmain.js - updatePageBody/~ //
+					//
+	// 			Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 			}
 		}
 	},
@@ -176,7 +177,7 @@ Meteor.methods({
 				var cyoa = Cyoas.findOne({_id: page.cyoaid});
 	// 				var updatingPage = ({title:page.title, parentid:page.parentid, cyoaid:page.cyoaid, owner:this.userId});
 				PagesBodies.update({_id: pageBody._id}, {$set:/*{title:page.title, conditions:*/pageBody/*.conditions, cyoaid:page.cyoaid}*/});
-				Meteor.call("updateCyoa", cyoa);
+				Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 			}
 		}
 	},
@@ -195,7 +196,8 @@ Meteor.methods({
 					if (pageChoiceToremove.parent[i].parentid == pageBodyid) {
 						pageChoiceToremove.parent.splice(i, 1);
 						Meteor.call("updatePage", pageChoiceToremove);
-						return;
+						return; // calling: ~/sharedworlds/shared/pagemain.js - updatePage/~ //
+					//
 					}
 				}
 			}

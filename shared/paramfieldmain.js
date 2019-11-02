@@ -35,7 +35,7 @@ Meteor.methods({
 				setModifier.$set['data.' + dataIndex ] = value;
 				console.log(setModifier);
 				CyoaParams.update({_id:realParam._id}, setModifier);
-				Meteor.call("updateCyoa", cyoa);
+				Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 			}
 		}
 	},

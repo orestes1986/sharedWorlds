@@ -18,7 +18,11 @@
 												{{#if is_its_page}}
 													<span style="color:#f00;" contenteditable="true" class="js-editable-value" data-data-index="{{data_index}}" data-value-index="{{value_Index}}">{{this.value}}</span>
 <!-- 														{{> editableText context=../.. collection='cyoaParams' field=(get_value data_index value_Index)}}, -->
-													<a href="#" class="js-set-body-to-param" data-data-index="{{data_index}}" data-value-index="{{value_Index}}">(Connect this value to a body)</a>,
+													{{#if has_body}}
+														<a href="#" class="js-set-body-to-param" data-data-index="{{data_index}}" data-value-index="{{value_Index}}">(Connected to {{bodyid}}, click to connect to another body)</a>,
+													{{else}}
+														<a href="#" class="js-set-body-to-param" data-data-index="{{data_index}}" data-value-index="{{value_Index}}">(Connect this value to a body)</a>,
+													{{/if}}
 												{{else}}
 													{{this.value}}
 													<a href="/cyoas/{{get_cyoaid}}/page/{{pageid}}">({{page_name}})</a>,

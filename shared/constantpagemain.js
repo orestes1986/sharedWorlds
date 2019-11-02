@@ -32,12 +32,12 @@ Meteor.methods({
 				console.log("addingPage");
 				console.log(addingPage);
 				var pageid = Pages.insert(addingPage);
-				Meteor.call("addPageBody", pageid, page.start.getTime());
+				Meteor.call("addPageBody", pageid, page.start.getTime()); // calling: ~/sharedworlds/shared/pagebodiesmain.js - addPageBody/~ //
 // 				console.log("pageid");
 // 				console.log(pageid);
 // 				console.log("page");
 // 				console.log(Pages.findOne({_id:pageid}));
-				Meteor.call("updateCyoa", cyoa);
+				Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 				if (Meteor.isClient) {
 					$("#page_add_form").modal('hide');
 				}
@@ -63,7 +63,7 @@ Meteor.methods({
 						console.log(pageBodies[i]);
 						PagesBodies.update({_id:pageBodies[i]._id}, {$set:{time:page.start.getTime()}});
 					}
-					Meteor.call("updateCyoa", cyoa);
+					Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 				}
 			}
 		}

@@ -1,0 +1,41 @@
+<template name="numParam_edit_form">
+	<div class="modal fade" id="numParam_edit_form">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group">
+						{{#with numParam}}
+							<h1>{{> editableText collection="numParams" field="title"}}
+							<a href="#" data-data-index="{{data_index}}" class="glyphicon glyphicon-minus js-remove-numParam" style="color:red;"></a></h1>
+							Point pool:										<a href="#" data-data-index="{{data_index}}" class="glyphicon glyphicon-plus js-add-points"></a>
+							{{#each point_pool}}
+								{{#let ppIndex=@index}}
+									{{#if is_its_page}}
+										<span style="color:#f00;" contenteditable="true" type="number" class="js-editable-value js-editable-num" data-pp-index="{{ppIndex}}">{{this.value}}</span>
+										{{#if has_body}}
+											<a href="#" class="js-set-body-to-numParam" data-pp-index="{{ppIndex}}">(Connected to {{bodyid}}, click to connect to another body)</a>,
+										{{else}}
+											<a href="#" class="js-set-body-to-numParam" data-pp-index="{{ppIndex}}">(Connect this value to a body)</a>,
+										{{/if}}
+									{{else}}
+										{{this.value}}
+										<a href="/cyoas/{{get_cyoaid}}/page/{{pageid}}">({{page_name}})</a>,
+									{{/if}}
+								{{/let}}
+							{{/each}}
+							<p>
+							{{#each num_data}}
+								{{#let valueIndex=@index}}
+									<span class="js-editable-value js-editable-data" data-value-index="{{valueIndex}}"> {{this.name}}</span>, 
+								{{/let}}
+							{{/each}}
+							<br>
+								<a href="#" class="glyphicon glyphicon-plus js-add-data"></a>
+							</p>
+						{{/with}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

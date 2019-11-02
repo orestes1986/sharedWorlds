@@ -4,6 +4,8 @@
 	margin:2px;
 }
 .css-body-area {
+/*     position: relative; */
+/*     display: inline; */
 	min-width:50px;
 	min-height:20px;
 	border:1px solid #000;
@@ -26,17 +28,39 @@
 	right:5%;
 	float:right;
 }
+.css-conditions-and-time {
+/*     position: relative; */
+/*     display: block; */
+/*     float: none; */
+/*     clear: left; */
+/* 	border:1px solid #0ff; */
+/*     margin-bottom:65px; */
+
+}
+.css-condition-list {
+/*     position: relative; */
+/*     display: inline; */
+/* 	float:left; */
+border:1px solid #0ff;
+}
 .css-body-time {
 	text-align:right;
-	float:right;
-	top: 0px;
-    margin-top: 10px;
+/*     position: relative; */
+/*     display: inline; */
+/* 	float:right; */
+/* 	top: 0px; */
+/*     margin-top: 10px; */
 
 /* 	margin-bottom: 30px; */
 }
 .css-editable-time {
-/* 	position: relative; */
+	position: relative;
+	height: 30px;
+	margin-bottom: 30px;
+}
+.css-editable-time input {
+	position: relative;
 	width: 40px;
 	height: 30px;
-/* 	margin-bottom: 30px; */
+	margin-bottom: 30px;
 }

@@ -26,7 +26,7 @@ Meteor.methods({
 	//					 console.log("event callback received worldid: "+res);
 	//					 Session.set("eventid", res);
 	// 				}*/
-				});
+				}); // calling: ~/sharedworlds/shared/worldmain.js - updateWorldEdit/~ //
 // 				console.log(worldid);
 				return Events.findOne({_id:id});
 			}
@@ -62,7 +62,7 @@ Meteor.methods({
 					var worldid = Meteor.call("updateWorldEdit", worldId, function(err, res){
 						if (!err){// all good
 						}
-					});
+					}); // calling: ~/sharedworlds/shared/worldmain.js - updateWorldEdit/~ //
 			} else {
 				return false;
 			}

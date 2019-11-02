@@ -29,7 +29,7 @@ Template.param_add_form.helpers({
 // 					console.log("event callback received id: "+res);
 // 					Session.set("cyoaid", res);
 // 				}
-// 			});
+// 			}); // calling: ~/sharedworlds/shared/?????????.js - ?????????/~ //
 // 		} else {
 // 			console.log("URL didn't given!");
 // 			var id = Meteor.call("addCyoa", this, Session.get("eventid"), function(err, res){
@@ -37,7 +37,7 @@ Template.param_add_form.helpers({
 // 					console.log("event callback received id: "+res);
 // 					Session.set("cyoaid", res);
 // 				}
-// 			});
+// 			}); // calling: ~/sharedworlds/shared/cyoamain.js - addCyoa/~ //
 		this.cyoaid = Session.get("cyoaid");
 		this.pageid = Session.get("pageid");
 		this.owner = Meteor.user()._id;
@@ -48,14 +48,14 @@ Template.param_add_form.helpers({
 // 					console.log("event callback received id: "+res);
 					Session.set("cyoaid", res);
 				}
-			});
+			}); // calling: ~/sharedworlds/shared/numparammain.js - addNumParam/~ //
 		} else {
 			var id = Meteor.call("addParam", this, function(err, res){
 				if (!err){// all good
 // 					console.log("event callback received id: "+res);
 					Session.set("cyoaid", res);
 				}
-			});
+			}); // calling: ~/sharedworlds/shared/parammain.js - addParam/~ //
 		}
 // 		}
 		console.log("cyoa_add_form Form data!!!!!!", this);
@@ -143,6 +143,13 @@ Template.param_edit_form.helpers({
 	},
 	is_its_page: function() {
 		return (this.pageid == Session.get("pageid"));
+	},
+	has_body: function() {
+// 		console.log("is_its_page");
+// 		console.log(this);
+// 		console.log(this.pageid);
+// 		console.log(Session.get("pageid"));
+		return (this.bodyid);
 	},
 	page_name: function () {
 		if (Pages.findOne({_id:this.pageid})) {

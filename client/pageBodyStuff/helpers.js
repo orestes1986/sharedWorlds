@@ -10,6 +10,13 @@ Template.condition_select_form.helpers({
 		return CyoaParams.find({cyoaid:Session.get("cyoaid")});
 // 		return [];//"the selected value will appear here";
 	},
+	numparam: function() {
+// 		console.log("param condition_select_form: ");
+// 		console.log(this);
+// 		console.log(values);
+		return NumParams.find({cyoaid:Session.get("cyoaid")});
+// 		return [];//"the selected value will appear here";
+	},
 });
 Template.conditionList.helpers({
 	isFirst: function(index) {
@@ -106,84 +113,46 @@ Template.bodyEditor.helpers({
 		return  'texts.' + textsindex + '.name';
 	},
 	get_time: function(bodyid) {
+        var remain = this.time;
+        var millenia = Math.trunc(remain / (1000*60*60*24*365*1000));
+        remain = remain - (millenia * 1000*60*60*24*365*1000);
+        var centuries = Math.trunc(remain / (1000*60*60*24*365*100));
+        remain = remain - (centuries * 1000*60*60*24*365*100);
+        var decades = Math.trunc(remain / (1000*60*60*24*365*10));
+        remain -= (decades * 1000*60*60*24*365*10);
+        var years = Math.trunc(remain / (1000*60*60*24*365));
+        remain -= (years * 1000*60*60*24*365);
+        var months = Math.trunc(remain / (1000*60*60*24*30));
+        remain -= (months * 1000*60*60*24*30);
+        var weeks = Math.trunc(remain / (1000*60*60*24*7));
+        remain -= (weeks * 1000*60*60*24*7);
+        var days = Math.trunc(remain / (1000*60*60*24));
+        remain -= (days * 1000*60*60*24);
+        var hrs = Math.trunc(remain / (1000*60*60));
+        remain -= (hrs * 1000*60*60);
+        var mins = Math.trunc(remain / (1000*60));
+        remain -= (mins * 1000*60);
+        var secs = Math.trunc(remain / (1000));
+        remain -= (secs * 1000);
+
 		timeToReturn = {
 			bodyid: bodyid,
 			overall: this.time,
-			seconds: '',
-			minutes: '',
-			hours: '',
-			days: '',
-			weeks: '',
-			months: '',
-			years: '',
-			decades: '',
-			centuries: '',
+			miliseconds: remain,
+			seconds: secs,
+			minutes: mins,
+			hours: hrs,
+			days: days,
+			weeks: weeks,
+			months: months,
+			years: years,
+			decades: decades,
+			centuries: centuries,
+            millenia: millenia
 		};
-		var time = this.time;
+//         var date = new Date(s);
 // 		console.log("get_time");
-		console.log("get_time");
-		console.log(this);
-		var page = Pages.findOne({_id: this.pageid});
-		var pageBodies = PagesBodies.find ({pageid:page._id}, {sort:{createdOn: 1}}).fetch();
-		if (Meteor.pageBodyFunctions.isItConstant(page)) {
-// 			var constantflag = true;
-// 			if (Meteor.pageBodyFunctions.isItFirst(page)) {
-// 				console.log("ConstantFlag is true");
-// 				if (!(this._id == pageBodies[0]._id)) {
-// 					constantflag = false;
-// 				}
-// 			}
-// 		}
-// 		if (constantflag) {
-			return {
-				wholeDate: new Date(parseInt(this.time)),
-			};
-		}
-		var timeToCheck = 100*365*24*60*60*1000;
-		if (time > timeToCheck) {
-			timeToReturn.centuries = Math.trunc(time/timeToCheck);
-			time -= Math.trunc(time/timeToCheck) * timeToCheck;
-		}
-		timeToCheck = 10*365*24*60*60*1000;
-		if (time > timeToCheck) {
-			timeToReturn.decades = Math.trunc(time/timeToCheck);
-			time -= Math.trunc(time/timeToCheck) * timeToCheck;
-		}
-		timeToCheck = 365*24*60*60*1000;
-		if (time > timeToCheck) {
-			timeToReturn.years = Math.trunc(time/timeToCheck);
-			time -= Math.trunc(time/timeToCheck) * timeToCheck;
-		}
-		timeToCheck = 30*24*60*60*1000;
-		if (time > timeToCheck) {
-			timeToReturn.months = Math.trunc(time/timeToCheck);
-			time -= Math.trunc(time/timeToCheck) * timeToCheck;
-		}
-		timeToCheck = 7*24*60*60*1000;
-		if (time > timeToCheck) {
-			timeToReturn.weeks = Math.trunc(time/timeToCheck);
-			time -= Math.trunc(time/timeToCheck) * timeToCheck;
-		}
-		timeToCheck = 24*60*60*1000;
-		if (time > timeToCheck) {
-			timeToReturn.days = Math.trunc(time/timeToCheck);
-			time -= Math.trunc(time/timeToCheck) * timeToCheck;
-		}
-		timeToCheck = 60*60*1000;
-		if (time > timeToCheck) {
-			timeToReturn.hours = Math.trunc(time/timeToCheck);
-			time -= Math.trunc(time/timeToCheck) * timeToCheck;
-		}
-		timeToCheck = 60*1000;
-		if (time > timeToCheck) {
-			timeToReturn.minutes = Math.trunc(time/timeToCheck);
-			time -= Math.trunc(time/timeToCheck) * timeToCheck;
-		}
-		timeToCheck = 1000;
-		if (time > timeToCheck) {
-			timeToReturn.seconds = Math.trunc(time/timeToCheck);
-			time -= Math.trunc(time/timeToCheck) * timeToCheck;
-		}
+// 		console.log(date);
 // 		console.log(timeToReturn);
 		return timeToReturn;
 	},
@@ -267,6 +236,69 @@ Template.condition_select_value.helpers({
 		return CyoaParams.findOne();
 // 		console.log(this);
 		return this;
+	},
+	is_its_page: function() {
+		return (this.pageid == Session.get("pageid"));
+	},
+	page_name: function () {
+// 		console.log(Pages.findOne({_id:this.pageid}));
+		return Pages.findOne({_id:this.pageid}).title;
+	},
+	get_cyoaid: function() {
+		return Session.get("cyoaid");
+	},
+});
+Template.condition_select_numvalue.helpers({
+	param:function(){
+// 		console.log("entered param");
+// 		console.log(CyoaParams.findOne({_id:Session.get("paramid")}));
+		return NumParams.findOne({_id:Session.get("paramid")});
+	},
+	// find all visible data
+	data:function(){
+// 		console.log("entered data");
+// 		console.log(this);
+		if (this.data) {
+			return this.data;
+		}
+	},
+	// find all visible values
+	values:function(dataValue){
+// 		console.log("entered values");
+// 		console.log(index);
+// 		console.log(this);
+		if (this.values) {
+// 			console.log(this.values);
+			return this.values;
+		}
+	},
+	// find all visible values
+	value:function(dataValue){
+// 		console.log("entered values");
+// 		console.log(index);
+// 		console.log(this);
+		if (this.data) {
+// 			console.log(this.data);
+// 			console.log(this.data.[0]);
+// 			console.log(this.data[0]);
+			var datum =  this.data[dataValue];
+			if (datum.values) {
+// 				console.log(datum.values);
+	// 			console.log(this.values[0]);
+				return datum.values;
+			}
+		}
+	},
+	get_name: function(dataIndex){
+// 		console.log("get_name");
+		return  'data.' + dataIndex + '.name';
+	},
+	get_value: function(dataIndex, index){
+// 		console.log("get_value");
+// 		console.log(dataIndex);
+// 		console.log(index);
+// 		console.log('data.'+dataIndex+'.values.'+index);
+		return  'data.'+dataIndex+'.values.'+index+'.value';
 	},
 	is_its_page: function() {
 		return (this.pageid == Session.get("pageid"));

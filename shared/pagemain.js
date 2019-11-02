@@ -11,7 +11,7 @@ Meteor.methods({
 			if (cyoa) {
 				page.owner = this.userId;
 				var pageid = Pages.insert(page);
-				Meteor.call("updateCyoa", cyoa);
+				Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 				if (Meteor.isClient) {
 					$("#page_add_form").modal('hide');
 				}
@@ -30,7 +30,7 @@ Meteor.methods({
 					var cyoa = Cyoas.findOne({_id: page.cyoaid});
 	// 				var updatingPage = ({title:page.title, parentid:page.parent.parentid, cyoaid:page.cyoaid, owner:this.userId});
 					Pages.update({_id: page._id}, {$set:{/*title:page.title, body:page.body,*/ parent:page.parent, cyoaid:page.cyoaid}});
-					Meteor.call("updateCyoa", cyoa);
+					Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 				}
 			}
 		}
@@ -76,7 +76,7 @@ Meteor.methods({
 					for (var datas = 0; datas < realParam[params].data.length; datas++) {
 						for (var value = 0; value < realParam[params].data[datas].values.length; value++) {
 							if (realParam[params].data[datas].values[value].pageid == page._id) {
-								Meteor.call("removeParamFieldValue", realParam[params]._id, datas, value);
+								Meteor.call("removeParamFieldValue", realParam[params]._id, datas, value); // calling: ~/sharedworlds/shared/paramvaluemain.js - removeParamFieldValue/~ //
 								repeatFlag = true;
 								console.log("true");
 								break;

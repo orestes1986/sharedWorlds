@@ -18,8 +18,8 @@
 // PARAM Field VALUE method definitions
 Meteor.methods({
 	addParamFieldValue:function(paramid, dataIndex, value){
-		console.log("Entered  addParamFieldValue");
-		console.log(paramid);
+// 		console.log("Entered  addParamFieldValue");
+// 		console.log(paramid);
 // 		console.log(dataIndex);
 		var realParam = CyoaParams.findOne({_id:paramid});
 // 		console.log(realParam);
@@ -48,7 +48,7 @@ Meteor.methods({
 					setModifier.$set['data.' + dataIndex + '.values.'+valueIndex] = value;
 	// 				console.log(setModifier);
 					CyoaParams.update({_id:realParam._id}, setModifier);
-					Meteor.call("updateCyoa", cyoa);
+					Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 					return 1;
 // 					return "Value added";
 				} else {
@@ -74,7 +74,7 @@ Meteor.methods({
 						setModifier.$set['data.' + dataIndex + '.values.'+valueIndex] = value;
 		// 				console.log(setModifier);
 						CyoaParams.update({_id:realParam._id}, setModifier);
-						Meteor.call("updateCyoa", cyoa);
+						Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 						return 1;
 	// 					return "Value added";
 					} else {
@@ -107,7 +107,7 @@ Meteor.methods({
 							setModifier.$set['data.' + dataIndex + '.values.'+valueIndex+'.value'] = updating.value;
 	// 						console.log(setModifier);
 							CyoaParams.update({_id:realParam._id}, setModifier);
-							Meteor.call("updateCyoa", cyoa);
+							Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 						} else {
 							if (Meteor.isServer) {
 								console.log("it is NOT different");
@@ -116,7 +116,7 @@ Meteor.methods({
 						}
 					}
 				} else {
-						Meteor.call("removeParamFieldValue", paramid, dataIndex, valueIndex);
+						Meteor.call("removeParamFieldValue", paramid, dataIndex, valueIndex); // calling: ~/sharedworlds/shared/paramvaluemain.js - removeParamFieldValue/~ //
 				}
 			}
 		}
@@ -140,7 +140,7 @@ Meteor.methods({
 					var setModifier = { $set: {} };
 					setModifier.$set['data.' + dataIndex + '.values.'+valueIndex+'.bodyid'] = updating.bodyid;
 					CyoaParams.update({_id:realParam._id}, setModifier);
-					Meteor.call("updateCyoa", cyoa);
+					Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 					return 1;
 					console.log("Value added");
 // 					return "Value added";
@@ -153,21 +153,21 @@ Meteor.methods({
 		}
 	},
 	removeParamFieldValue: function(paramid, dataIndex, valueIndex){
-		console.log("Entered  removeParamFieldValue");
+// 		console.log("Entered  removeParamFieldValue");
 		var realParam = CyoaParams.findOne({_id:paramid});
-		console.log(realParam);
+// 		console.log(realParam);
 		if (realParam){
-			console.log("it is realParam");
+// 			console.log("it is realParam");
 			if (realParam.owner == this.userId) {
-				console.log("it is Empty");
+// 				console.log("it is Empty");
 				var unsetObj = {};
 				unsetObj['data.' + dataIndex + '.values.'+valueIndex ] = '1';
-				console.log(unsetObj);
+// 				console.log(unsetObj);
 				CyoaParams.update({_id:realParam._id}, {$unset:unsetObj}, {multi:true});
 				
 				var pullObj = {};
 				pullObj['data.' + dataIndex + '.values' ] = null;
-				console.log(pullObj);
+// 				console.log(pullObj);
 				CyoaParams.update({_id:realParam._id}, {$pull:pullObj}, {multi:true});
 			}
 		}

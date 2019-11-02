@@ -51,10 +51,10 @@ Template.cyoa_add_form.helpers({
 // 					console.log("event callback received id: "+res);
 // 					Session.set("cyoaid", res);
 // 				}
-// 			});
+// 			}); // calling: ~/sharedworlds/shared/?????????.js - ?????????/~ //
 // 		} else {
 // 			console.log("URL didn't given!");
-// 			var id = Meteor.call("addCyoa", this, Session.get("eventid"), function(err, res){
+// 			var id = Meteor.call("addCyoa", this, Session.get("eventid"), function(err, res){ // calling: ~/sharedworlds/shared/cyoamain.js - addCyoa/~ //
 // 				if (!err){// all good
 // 					console.log("event callback received id: "+res);
 // 					Session.set("cyoaid", res);
@@ -65,7 +65,7 @@ Template.cyoa_add_form.helpers({
 					console.log("event callback received id: "+res);
 					Session.set("cyoaid", res);
 				}
-			});
+			}); // calling: ~/sharedworlds/shared/cyoamain.js - addCyoa/~ //
 // 		}
 		callbacks.success(); // Display success message.
 		callbacks.reset();   // Run each Element's custom `reset` function to clear the form.

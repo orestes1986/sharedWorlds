@@ -8,12 +8,23 @@ Template.addParam.events({
 		$("#param_add_form").modal('show');
 	},
 });
+Template.param_add_form.events({
+	'submit #submit_doc':function(event){
+// 		console.log("showing the modal...");
+		$("#param_add_form").modal('hide');
+	},
+});
 
 Template.paramlist.events({
 	'click .js-paramItem':function(event){
 // 		console.log("showing the modal...");
 		Session.set("paramid", this._id);
 		$("#param_edit_form").modal('show');
+	},
+	'click .js-numParamItem':function(event){
+// 		console.log("showing the modal...");
+		Session.set("numParamid", this._id);
+		$("#numParam_edit_form").modal('show');
 	},
 // 	'submit #param_add_form':function(event){
 // 		console.log("param_add_form submited...");
@@ -69,6 +80,7 @@ Template.param_edit_form.events({
 		}
 	},
 	'click .js-add-value': function(event) {
+		console.log("js-add-value clicked");
 		var param = CyoaParams.findOne({_id:Session.get("paramid")});
 		var dataindex = $(event.currentTarget).attr("data-data-index");
 		var value = { value: "Another value", pageid: Session.get("pageid") };
@@ -144,7 +156,7 @@ Template.param_edit_form.events({
 		$("#param_edit_form").modal('hide');
 	},
 	'click .js-set-body-to-param': function(event){
-// 		console.log("Connect param to body clicked");
+		console.log("Connect param to body clicked");
 // 		console.log($(event.currentTarget).attr("data-data-index"));
 // 		console.log($(event.currentTarget).attr("data-value-index"));
 // 		Session.set(value);

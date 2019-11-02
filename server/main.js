@@ -74,7 +74,7 @@ Meteor.startup(function () {
 				lastEdit: new Date(),
 			} );
 // 			var eventid = Events.insert(addingEvent);
-// 			var event = Meteor.call("addEvent", addingEvent, worldid);
+// 			var event = Meteor.call("addEvent", addingEvent, worldid); // calling: ~/sharedworlds/shared/eventmain.js - addEvent/~ //
 			var max_date_value = 8640000000000000;
 			console.log("max_date_value");
 			console.log(max_date_value);
@@ -95,7 +95,8 @@ Meteor.startup(function () {
 	//					 console.log("event callback received worldid: "+res);
 	//					 Session.set("eventid", res);
 	// 				}*/
-				});
+				}); // calling: ~/sharedworlds/shared/worldmain.js - updateWorldEdit/~ //
+				//
 // 				console.log(worldid);
 // 				return Events.findOne({_id:id});
 			}			
@@ -109,8 +110,8 @@ Meteor.startup(function () {
 			if (addedCyoa) {
 				////////////////////////////////////////////////
 				
-				Meteor.call("addAdventure", userid, cyoaid);
-				Meteor.call("updateCyoa", addedCyoa);
+				Meteor.call("addAdventure", userid, cyoaid); // calling: ~/sharedworlds/shared/addAdventure.js - addAdventure //
+				Meteor.call("updateCyoa", addedCyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 			}
 		}
 	}

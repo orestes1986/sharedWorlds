@@ -79,6 +79,36 @@ Template.gameParamlist.helpers({
 // 		}
 		return param;
 	},
+	numParams: function(){
+// 		console.log("gameParamlist params");
+// 		console.log(this);
+		if (this.numParam) {
+			var numParamsToReturn = [];
+			for (var i = 0; i < this.numParam.length; i++) {
+				var paramFlag = false;
+				for (var j = 0; j < numParamsToReturn.length; j++) {
+					if (numParamsToReturn[j].numParamid == this.numParam[i].numParamid) {
+						paramFlag = true;
+					}
+				}
+				if (paramFlag == false) {
+					numParamsToReturn.push(this.numParam[i]);
+				}
+			}
+			return numParamsToReturn;
+		}
+	},
+	numParam: function(){
+// 		console.log("gameParamlist param");
+// 		console.log(this);
+		var numParam = NumParams.findOne( { _id:this.numParamid } );
+// 		console.log("param 123123 12132");
+// 		console.log(param);
+// 		var paramToReturn = {
+// 			this.data[this.paramIndex].name
+// 		}
+		return numParam;
+	},
 });
 Template.gameParamItem.helpers({
 	params: function() {
@@ -111,6 +141,25 @@ Template.gameParamItem.helpers({
 		}
 		return returningObj; // Players.findOne( { _id:Session.get("playerid") } );
 	},
+	numParams: function() {
+		var numParam = NumParams.findOne({_id: Session.get("numParamid")}); // the numParam
+		var returningObj = [];
+		if (this.numParam) {
+			if (this.numParam.length > 0) {
+				for (var i = 0; i < this.numParam.length; i++) {
+					if (Session.get("numParamid") == this.numParam[i].numParamid) {
+						{
+							returningObj.push({
+								name: numParam.data[this.numParam[i].paramIndex].name,
+								value: numParam.data[this.numParam[i].paramIndex].values[this.numParam[i].paramValueIndex].value
+							});
+						}
+					}
+				}
+			}
+		}
+		return returningObj;
+	},
 });
 Template.gamePageItem.helpers({
 	player:function(){
@@ -119,6 +168,10 @@ Template.gamePageItem.helpers({
 	},
 	hasParams:function(){
 		return (this.param);
+// 		return Players.findOne( { _id:Session.get("playerid") } );
+	},
+	hasNumParams:function(){
+		return (this.numParam);
 // 		return Players.findOne( { _id:Session.get("playerid") } );
 	},
 	choices:function() {

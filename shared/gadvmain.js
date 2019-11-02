@@ -13,12 +13,12 @@ Meteor.methods({
 				var addingGame = ({cyoaid:cyoaid, owner:this.userId, createdOn:new Date(), lastEdit:new Date()});
 				var gameid = GameAdvs.insert(addingGame);
 // 				console.log(gameid);
-				var bodyid = Meteor.call("getTheRightBody", page._id);
+				var bodyid = Meteor.call("getTheRightBody", page._id); // calling: ~/sharedworlds/shared/playermain.js - getTheRightBody/~ //
 // 				console.log("getTheRightBody returned 2");
 // 				console.log(bodyid);
 				var realBody = PagesBodies.findOne({_id:bodyid});
 				if (realBody) {
-					//Meteor.call("getTheRightBody", page._id);
+					//Meteor.call("getTheRightBody", page._id); // calling: ~/sharedworlds/shared/playermain.js - getTheRightBody/~ //
 					var addingPlayer = ({gameid:gameid, playerid:this.userId, pageid:page._id, bodyid:bodyid, time:realBody.time});
 					var playerid = Players.insert(addingPlayer);
 		// 			console.log(gameid);

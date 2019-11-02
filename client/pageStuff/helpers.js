@@ -149,7 +149,7 @@ Template.existingPageList.helpers({
 // 		console.log(Session.get("pageid"));
 		var notReadyFlag = false;
 		var pageBodies = PagesBodies.find({pageid:this._id}).fetch();
-		console.log(pageBodies);
+// 		console.log(pageBodies);
 		if ((pageBodies) && (pageBodies.length > 0)){
 			for (var i = 0; i < pageBodies.length; i++) {
 				for (var j = 0; j < pageBodies[i].texts.length; j++) {

@@ -48,7 +48,7 @@ Meteor.methods({
 					setModifier.$set['data.' + dataIndex + '.values.'+valueIndex] = value;
 	// 				console.log(setModifier);
 					CyoaParams.update({_id:realParam._id}, setModifier);
-					Meteor.call("updateCyoa", cyoa);
+					Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 					return 1;
 // 					return "Value added";
 				} else {
@@ -74,7 +74,7 @@ Meteor.methods({
 						setModifier.$set['data.' + dataIndex + '.values.'+valueIndex] = value;
 		// 				console.log(setModifier);
 						CyoaParams.update({_id:realParam._id}, setModifier);
-						Meteor.call("updateCyoa", cyoa);
+						Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 						return 1;
 	// 					return "Value added";
 					} else {
@@ -99,7 +99,7 @@ Meteor.methods({
 				var realPage = Pages.findOne({_id: pageid});
 				if (realPage) {
 // 					var bodyid = Meteor.playerFunctions.getTheRightBody(pageid, realPlayer._id);
-					var bodyid = Meteor.call("getTheRightBody", pageid, realPlayer._id);
+					var bodyid = Meteor.call("getTheRightBody", pageid, realPlayer._id); // calling: ~/sharedworlds/shared/playermain.js - getTheRightBody/~ //
 // 					console.log("getTheRightBody returned 3");
 // 					console.log(bodyid);
 					var realBody = PagesBodies.findOne({_id:bodyid});
@@ -155,7 +155,7 @@ Meteor.methods({
 								setModifier.$set['data.' + dataIndex + '.values.'+valueIndex+'.value'] = updating.value;
 		// 						console.log(setModifier);
 								CyoaParams.update({_id:realParam._id}, setModifier);
-								Meteor.call("updateCyoa", cyoa);
+								Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 							} else {
 								if (Meteor.isServer) {
 									console.log("it is NOT different");
@@ -187,7 +187,7 @@ Meteor.methods({
 // 					var setModifier = { $set: {} };
 // 					setModifier.$set['data.' + dataIndex + '.values.'+valueIndex+'.bodyid'] = updating.bodyid;
 // 					CyoaParams.update({_id:realParam._id}, setModifier);
-// 					Meteor.call("updateCyoa", cyoa);
+// 					Meteor.call("updateCyoa", cyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 // 					return 1;
 // 					console.log("Value added");
 // // 					return "Value added";
@@ -302,7 +302,7 @@ Meteor.methods({
 // 											break;
 // 										}
 										if (!orBool) {
-											orBool = Meteor.call("checkCondition", realPlayer, bodies[bodiesi].conditions[ors[orsi][orsj]]);
+											orBool = Meteor.call("checkCondition", realPlayer, bodies[bodiesi].conditions[ors[orsi][orsj]]); // calling: ~/sharedworlds/shared/playermain.js - checkCondition/~ //
 // 											console.log("orBool");
 // 											console.log(orBool);
 // 											orBool = Meteor.playerFunctions.checkCondition(realPlayer, bodies[bodiesi].conditions[ors[orsi][orsj]]);
@@ -321,7 +321,7 @@ Meteor.methods({
 								for (var andsi = 0; andsi < ands.length; andsi++) {
 // 									console.log(bodies[bodiesi].conditions[ands[andsi]]);
 // 									if ( Meteor.playerFunctions.checkCondition(realPlayer, bodies[bodiesi].conditions[ands[andsi]]) ) {
-									if (Meteor.call("checkCondition", realPlayer, bodies[bodiesi].conditions[ands[andsi]]) ) {
+									if (Meteor.call("checkCondition", realPlayer, bodies[bodiesi].conditions[ands[andsi]]) ) { // calling: ~/sharedworlds/shared/playermain.js - checkCondition/~ //
 										foundAfalse = true;
 										break;
 									}

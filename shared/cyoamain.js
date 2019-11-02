@@ -22,13 +22,13 @@ Meteor.methods({
 					var event = Events.findOne({_id:eventid});
 					console.log("Event start")
 					console.log(event.start);
-					var pageBodyId = Meteor.call("addPageBody", pageid, event.start);
+					var pageBodyId = Meteor.call("addPageBody", pageid, event.start); // calling: ~/sharedworlds/shared/pagebodies.js - addPageBody/~ //
 					console.log("PagesBody");
 					console.log(PagesBodies.findOne({_id:pageBodyId}));
 				}
 			}
 			var addedCyoa = Cyoas.findOne({_id:cyoaid});
-			Meteor.call("updateCyoa", addedCyoa);
+			Meteor.call("updateCyoa", addedCyoa); // calling: ~/sharedworlds/shared/cyoamain.js - updateCyoa/~ //
 			return cyoaid;//addedCyoa;
 		}
 	},

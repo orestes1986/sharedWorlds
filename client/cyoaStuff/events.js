@@ -11,7 +11,7 @@ Template.deleteCyoa.events({
 // 			console.log(this._id);
 			console.log("Deleting Cyoa");
 // 			var cyoa = {_id:Session.get("worldid")};
-			Meteor.call("removeCyoa", this._id);
+			Meteor.call("removeCyoa", this._id); // calling: ~/sharedworlds/shared/cyoamain.js - removeCyoa/~ //
 		}
 	},
 });
