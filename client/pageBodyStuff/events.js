@@ -78,44 +78,16 @@ Template.conditionList.events({
 });
 Template.condition_select_form.events({
 	"click .js-param-to-choose":function(event){
-// 		console.log("js-param-to-choose clicked");
+		console.log("js-param-to-choose clicked");
 		$("#condition_select_form").modal('hide');
 		Session.set("paramid", this._id);
 		$("#condition_select_value").modal('show');
 	},
 	"click .js-numparam-to-choose":function(event){
-// 		console.log("js-param-to-choose clicked");
+		console.log("js-numparam-to-choose clicked");
 		$("#condition_select_form").modal('hide');
 		Session.set("numParamid", this._id);
 		$("#condition_select_numvalue").modal('show');
-	},
-});
-Template.condition_select_value.events({
-	"click .js-set-condition-value":function(event){
-// 		console.log("js-set-condition-value clicked");
-// 		$("#condition_select_form").modal('hide');
-// 		console.log(this);
-		var userId = Meteor.userId();
-		var dataIndex = $(event.currentTarget).attr("data-data-index");
-		var valueIndex = $(event.currentTarget).attr("data-value-index");
-// 		console.log("valueIndex");
-// 		console.log(valueIndex);
-		var selectedBodyid = Session.get("selectedBodyid");
-		var selectedConditionIndex = Session.get("selectedConditionIndex");
-		var paramid = Session.get("paramid");
-		var realPageBody = PagesBodies.findOne({_id:selectedBodyid, owner:userId});
-		if (realPageBody){
-// 			console.log(realPageBody);
-			realPageBody.conditions[selectedConditionIndex].index = selectedConditionIndex;
-			realPageBody.conditions[selectedConditionIndex].paramid = paramid;
-			realPageBody.conditions[selectedConditionIndex].paramIndex = dataIndex;
-			realPageBody.conditions[selectedConditionIndex].paramValueIndex = valueIndex;
-// 			console.log(realPageBody);
-		}
-		Meteor.call("updatePageBodyCondition", selectedBodyid, realPageBody.conditions[selectedConditionIndex]);
-// 		Meteor.call("removePageBodyChoice", this.bodyid, this.choiceid);
-// 		console.log(event);
-		$("#condition_select_value").modal('hide');
 	},
 });
 Template.choiseList.events({

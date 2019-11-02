@@ -53,3 +53,28 @@
 	<br>
 	<input type="checkbox" class="reactive-element" name="typeOfParam">
 </template>
+<template name="condition_select_value">
+	<div class="modal fade" id="condition_select_value">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group">
+						{{#with param}}
+							<h1>{{title}}</h1>
+							{{#each data}}
+								{{#let data_index=@index}} <!--  context=.. -->
+									<div>
+										<b>{{this.name}}: </b>
+										{{#each values data_index}}
+											<a href="#" class="js-set-condition-value" data-data-index="{{data_index}}" data-value-index="{{@index}}">{{this.value}}, </a>
+										{{/each}}
+									</div>
+								{{/let}}
+							{{/each}}
+						{{/with}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

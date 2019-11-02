@@ -3,6 +3,7 @@
 		<div class="row">
 			<div>{{> addBody}}</div>
 			<div>{{> condition_select_form}}{{> condition_select_value}}</div>
+			<div>{{> condition_select_form}}{{> condition_select_numvalue}}</div>
 			{{#each bodies}}
 				{{#let activebodyid = this._id}}
 <!-- 					{{>list_of_pages_form activebodyid=activebodyid}} -->
@@ -133,57 +134,6 @@
 						{{#each numparam}}
 							<a href="#" class="js-numparam-to-choose">{{title}}, </a>
 						{{/each}}
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</template>
-<template name="condition_select_value">
-	<div class="modal fade" id="condition_select_value">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-body">
-					<div class="form-group">
-						{{#with param}}
-							<h1>{{title}}</h1>
-							{{#each data}}
-								{{#let data_index=@index}} <!--  context=.. -->
-									<div>
-										<b>{{this.name}}: </b>
-										{{#each values data_index}}
-											<a href="#" class="js-set-condition-value" data-data-index="{{data_index}}" data-value-index="{{@index}}">{{this.value}}, </a>
-										{{/each}}
-									</div>
-								{{/let}}
-							{{/each}}
-						{{/with}}
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</template>
-
-<template name="condition_select_numvalue">
-	<div class="modal fade" id="condition_select_numvalue">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-body">
-					<div class="form-group">
-						{{#with param}}
-							<h1>{{title}}</h1>
-							{{#each data}}
-								{{#let data_index=@index}} <!--  context=.. -->
-									<div>
-										<b>{{this.name}}: </b>
-										{{#each values data_index}}
-											<a href="#" class="js-set-condition-value" data-data-index="{{data_index}}" data-value-index="{{@index}}">{{this.value}}, </a>
-										{{/each}}
-									</div>
-								{{/let}}
-							{{/each}}
-						{{/with}}
 					</div>
 				</div>
 			</div>

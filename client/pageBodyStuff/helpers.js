@@ -43,11 +43,18 @@ Template.conditionList.helpers({
 		}
 	},
 	paramName: function() {
-// 		console.log("paramName: ");
-// 		console.log(this);
-		var param = CyoaParams.findOne({_id:this.paramid});
+		console.log("paramName: ");
+		console.log(this);
+		console.log(this.numORnot);
+        if (this.numORnot == true) {
+            var param = NumParams.findOne({_id:this.paramid});
+			console.log("param");
+        } else {
+            var param = CyoaParams.findOne({_id:this.paramid});
+			console.log("numparam");
+        }
 		if (param) {
-// 			console.log(param);
+			console.log(param);
 			if (param.data) {
 				if (param.data[this.paramIndex]) {
 					if (param.data[this.paramIndex].name) {
@@ -180,137 +187,6 @@ Template.bodyEditor.helpers({
 	},
 });
 
-Template.condition_select_value.helpers({
-	param:function(){
-// 		console.log("entered param");
-// 		console.log(CyoaParams.findOne({_id:Session.get("paramid")}));
-		return CyoaParams.findOne({_id:Session.get("paramid")});
-	},
-	// find all visible data
-	data:function(){
-// 		console.log("entered data");
-// 		console.log(this);
-		if (this.data) {
-			return this.data;
-		}
-	},
-	// find all visible values
-	values:function(dataValue){
-// 		console.log("entered values");
-// 		console.log(index);
-// 		console.log(this);
-		if (this.values) {
-// 			console.log(this.values);
-			return this.values;
-		}
-	},
-	// find all visible values
-	value:function(dataValue){
-// 		console.log("entered values");
-// 		console.log(index);
-// 		console.log(this);
-		if (this.data) {
-// 			console.log(this.data);
-// 			console.log(this.data.[0]);
-// 			console.log(this.data[0]);
-			var datum =  this.data[dataValue];
-			if (datum.values) {
-// 				console.log(datum.values);
-	// 			console.log(this.values[0]);
-				return datum.values;
-			}
-		}
-	},
-	get_name: function(dataIndex){
-// 		console.log("get_name");
-		return  'data.' + dataIndex + '.name';
-	},
-	get_value: function(dataIndex, index){
-// 		console.log("get_value");
-// 		console.log(dataIndex);
-// 		console.log(index);
-// 		console.log('data.'+dataIndex+'.values.'+index);
-		return  'data.'+dataIndex+'.values.'+index+'.value';
-	},
-	exampleDoc: function () {
-		return CyoaParams.findOne();
-// 		console.log(this);
-		return this;
-	},
-	is_its_page: function() {
-		return (this.pageid == Session.get("pageid"));
-	},
-	page_name: function () {
-// 		console.log(Pages.findOne({_id:this.pageid}));
-		return Pages.findOne({_id:this.pageid}).title;
-	},
-	get_cyoaid: function() {
-		return Session.get("cyoaid");
-	},
-});
-Template.condition_select_numvalue.helpers({
-	param:function(){
-// 		console.log("entered param");
-// 		console.log(CyoaParams.findOne({_id:Session.get("paramid")}));
-		return NumParams.findOne({_id:Session.get("paramid")});
-	},
-	// find all visible data
-	data:function(){
-// 		console.log("entered data");
-// 		console.log(this);
-		if (this.data) {
-			return this.data;
-		}
-	},
-	// find all visible values
-	values:function(dataValue){
-// 		console.log("entered values");
-// 		console.log(index);
-// 		console.log(this);
-		if (this.values) {
-// 			console.log(this.values);
-			return this.values;
-		}
-	},
-	// find all visible values
-	value:function(dataValue){
-// 		console.log("entered values");
-// 		console.log(index);
-// 		console.log(this);
-		if (this.data) {
-// 			console.log(this.data);
-// 			console.log(this.data.[0]);
-// 			console.log(this.data[0]);
-			var datum =  this.data[dataValue];
-			if (datum.values) {
-// 				console.log(datum.values);
-	// 			console.log(this.values[0]);
-				return datum.values;
-			}
-		}
-	},
-	get_name: function(dataIndex){
-// 		console.log("get_name");
-		return  'data.' + dataIndex + '.name';
-	},
-	get_value: function(dataIndex, index){
-// 		console.log("get_value");
-// 		console.log(dataIndex);
-// 		console.log(index);
-// 		console.log('data.'+dataIndex+'.values.'+index);
-		return  'data.'+dataIndex+'.values.'+index+'.value';
-	},
-	is_its_page: function() {
-		return (this.pageid == Session.get("pageid"));
-	},
-	page_name: function () {
-// 		console.log(Pages.findOne({_id:this.pageid}));
-		return Pages.findOne({_id:this.pageid}).title;
-	},
-	get_cyoaid: function() {
-		return Session.get("cyoaid");
-	},
-});
 // Template.editableText.helpers({
 //     // test if a user is allowed to edit current doc
 //   userCanEdit : function(doc,Collection) {
