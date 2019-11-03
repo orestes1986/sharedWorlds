@@ -194,7 +194,7 @@ Template.condition_select_numvalue.events({
 // 		var valueIndex = $(event.currentTarget).attr("data-value-index");
 		var selectedBodyid = Session.get("selectedBodyid");
 		var selectedConditionIndex = Session.get("selectedConditionIndex");
-		var paramid = Session.get("paramid");
+		var paramid = Session.get("numParamid");
 		var realPageBody = PagesBodies.findOne({_id:selectedBodyid, owner:userId});
 		if (realPageBody){
 // 			console.log(realPageBody);

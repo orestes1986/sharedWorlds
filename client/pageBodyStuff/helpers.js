@@ -19,6 +19,9 @@ Template.condition_select_form.helpers({
 	},
 });
 Template.conditionList.helpers({
+    asda: function() {
+		console.log(this);
+	},
 	isFirst: function(index) {
 // 	  console.log("conditionList isFirst: ");
 // 	  console.log(this);
@@ -43,18 +46,24 @@ Template.conditionList.helpers({
 		}
 	},
 	paramName: function() {
-		console.log("paramName: ");
-		console.log(this);
-		console.log(this.numORnot);
-        if (this.numORnot == true) {
+// 		console.log("paramName: ");
+// 		console.log(this);
+// 		console.log(this.numORnot);
+        if (this.numORnot) {
+//             console.log("numORnot is true, " + this.numORnot);
             var param = NumParams.findOne({_id:this.paramid});
-			console.log("param");
+// 			console.log("numparam");
+// 			console.log(param);
+// 			console.log(this.paramid);
         } else {
+//             console.log("numORnot is false, " + this.numORnot);
             var param = CyoaParams.findOne({_id:this.paramid});
-			console.log("numparam");
+// 			console.log("param");
+// 			console.log(param);
+// 			console.log(this.paramid);
         }
 		if (param) {
-			console.log(param);
+// 			console.log(param);
 			if (param.data) {
 				if (param.data[this.paramIndex]) {
 					if (param.data[this.paramIndex].name) {
@@ -63,6 +72,16 @@ Template.conditionList.helpers({
 				}
 			}
 		}
+// 		if (param) {
+// 			console.log(param);
+// 			if (param.data) {
+// 				if (param.data[this.paramIndex]) {
+// 					if (param.data[this.paramIndex].name) {
+// 						return param.data[this.paramIndex].name;
+// 					}
+// 				}
+// 			}
+// 		}
 // 		console.log(values);
 		return "Select parameter";
 	},
