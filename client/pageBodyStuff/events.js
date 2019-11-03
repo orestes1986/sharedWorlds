@@ -75,6 +75,40 @@ Template.conditionList.events({
 // 		console.log(Session.get("selectedBodyid"));
 		$("#condition_select_form").modal('show');
 	},
+	'click .js-editable-value_index': function(event){
+		$(event.currentTarget).attr("contentEditable", true);
+	},
+	'keyup .js-editable-value_index': function(event){
+		console.log("keyup ", event.target.innerText);
+		if (event.keyCode < 48 || event.keyCode > 57) {
+// 			event.target.innerText
+			return false;
+		}
+	}
+// 	'keydown .js-editable-value_index': function(event){
+// 		console.log("keydown .js-editable-value_index event.keyCode ", event.keyCode);
+// 		console.log("keydown .js-editable-value_index event ", event);
+// 		console.log("keydown .js-editable-value_index this ", this);
+// 		if (event.keyCode >= 48 || event.keyCode <= 57) {
+// 			var value2pass = event.target.innerText;
+// 		} else {
+// 			var value2pass = event.target.innerText;
+// 		}
+// 		console.log("value2pass ", value2pass);
+// 		if (event.keyCode == 10 || event.keyCode == 13) {
+// // 			console.log("Enter was pressed");
+// 			event.preventDefault();
+// 			$(event.currentTarget).attr("contentEditable", false);
+// 			var text = $(event.currentTarget).text();
+// // 			console.log(text);
+// 			text = String(text).replace(/(\r\n|\n|\r)/gm,"");
+// 			text = String(text).replace(/(\t)/gm,'');
+// 			text = String(text).replace(" ",'');
+// // 			var value = {value:text};
+// 			Meteor.call("updateNumParamValueIndex", $(event.currentTarget).attr("data-data-body_id"), $(event.currentTarget).attr("data-data-index"), $(event.currentTarget).attr("data-value-index"), value2pass);
+// 		}
+// // 		event.target.innerText = value2pass;
+// 	},
 });
 Template.condition_select_form.events({
 	"click .js-param-to-choose":function(event){

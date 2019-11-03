@@ -143,10 +143,10 @@ option="smaller"}}>smaller</option>
 			</select>
 			{{#if this.numORnot}}
 <!-- 			{{paramValueIndex}} -->
-				{{#let value_index=@index}}
-					{{> editableText context=../.. 
-collection='pagesBodies' field=(conditions value_index paramValueIndex)}}
-				{{/let}}
+<!-- 				{{#let value_index=@index}} -->
+<!-- 					{{> editableText context=../.. collection='pagesBodies' field=(conditions value_index paramValueIndex)}} -->
+<!-- 				{{/let}} -->
+				<span style="color:#f00;" contenteditable="true" class="js-editable-value_index" data-body-id="{{body_id}}" data-data-index="{{@index}}">{{paramValueIndex}}</span>
 			{{else}}
 				<span>{{paramValue}}</span>,
 			{{/if}}
