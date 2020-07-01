@@ -137,8 +137,12 @@ option="unequal"}}>unequal</option>
 				{{#if this.numORnot}}
 					<option value="larger" {{select optionValue=operator 
 option="larger"}}>larger</option>
+					<option value="larger or equal" {{select optionValue=operator 
+option="larger or equal"}}>larger or equal</option>
 					<option value="smaller" {{select optionValue=operator 
 option="smaller"}}>smaller</option>
+					<option value="smaller or equal" {{select optionValue=operator 
+option="smaller or equal"}}>smaller or equal</option>
 				{{/if}}
 			</select>
 			{{#if this.numORnot}}
@@ -146,7 +150,7 @@ option="smaller"}}>smaller</option>
 <!-- 				{{#let value_index=@index}} -->
 <!-- 					{{> editableText context=../.. collection='pagesBodies' field=(conditions value_index paramValueIndex)}} -->
 <!-- 				{{/let}} -->
-				<span style="color:#f00;" contenteditable="true" class="js-editable-value_index" data-body-id="{{body_id}}" data-data-index="{{@index}}">{{paramValueIndex}}</span>
+				<span style="color:#f00;" contenteditable="true" class="js-editable-value_index" data-body-id="{{body_id}}" data-condition-index="{{@index}}">{{paramValueIndex}}</span>
 			{{else}}
 				<span>{{paramValue}}</span>,
 			{{/if}}

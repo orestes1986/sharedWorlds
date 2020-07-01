@@ -77,12 +77,30 @@ Template.conditionList.events({
 	},
 	'click .js-editable-value_index': function(event){
 		$(event.currentTarget).attr("contentEditable", true);
+		var selectedBodyid = $(event.currentTarget).attr("data-body-id");
+		console.log("keyup ", event.target.innerText, selectedBodyid);
 	},
 	'keyup .js-editable-value_index': function(event){
-		console.log("keyup ", event.target.innerText);
 		if (event.keyCode < 48 || event.keyCode > 57) {
-// 			event.target.innerText
-			return false;
+			var userId = Meteor.userId();
+			var selectedBodyid = $(event.currentTarget).attr("data-body-id");
+			var selectedConditionIndex = $(event.currentTarget).attr("data-condition-index");
+			var realPageBody = PagesBodies.findOne({_id:selectedBodyid, owner:userId});
+			var value = $(event.currentTarget).val();
+			console.log("keyup ", event.target);
+// 			console.log("userId", userId);
+// 			console.log("selectedBodyid", selectedBodyid);
+// 			console.log("selectedConditionIndex", selectedConditionIndex);
+// 			console.log("realPageBody", realPageBody);
+// 			console.log("value", value);
+// 			if (realPageBody){
+// 	// 			event.target.innerText
+// 				realPageBody.conditions[selectedConditionIndex].index = selectedConditionIndex;
+// 				realPageBody.conditions[selectedConditionIndex].operator = value;
+// 				realPageBody.conditions[selectedConditionIndex].paramValueIndex = event.target.innerText;
+// 				Meteor.call("updatePageBodyNumCondition", selectedBodyid, realPageBody.conditions[selectedConditionIndex]);
+// 				return false;
+// 			}
 		}
 	}
 // 	'keydown .js-editable-value_index': function(event){
